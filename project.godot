@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 PlayerInventory="*res://player/inventory.gd"
+GameState="*res://game_state/game_state.gd"
 
 [dotnet]
 
@@ -64,6 +65,11 @@ interact={
 [internationalization]
 
 locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue")
+
+[layer_names]
+
+2d_physics/layer_1="everything"
+2d_physics/layer_2="characters"
 
 [rendering]
 

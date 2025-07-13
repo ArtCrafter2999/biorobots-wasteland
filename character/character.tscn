@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://wj1eis50u36i"]
+
+[ext_resource type="Script" uid="uid://dpiw10jmmjmqo" path="res://character/character.gd" id="1_0rvpn"]
+[ext_resource type="Texture2D" uid="uid://ckuyc7lexqd8c" path="res://icon.svg" id="1_yf0e5"]
+[ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="2_1l1n4"]
+[ext_resource type="Script" uid="uid://2bkvobthg4cx" path="res://character/test/square_walk_state.gd" id="3_hx151"]
+[ext_resource type="Script" uid="uid://n2tyr4f3vap2" path="res://character/states/move_to_position_state.gd" id="4_0rvpn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l1n4"]
+size = Vector2(16, 16)
+
+[node name="Character" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 2
+script = ExtResource("1_0rvpn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_yf0e5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1l1n4")
+
+[node name="States" type="Node2D" parent="." node_paths=PackedStringArray("begining_state")]
+script = ExtResource("2_1l1n4")
+begining_state = NodePath("SquareWalk")
+
+[node name="SquareWalk" type="Node2D" parent="States" node_paths=PackedStringArray("move_to_position_state")]
+script = ExtResource("3_hx151")
+move_to_position_state = NodePath("../MoveToPositionState")
+
+[node name="MoveToPositionState" type="Node2D" parent="States"]
+script = ExtResource("4_0rvpn")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://eua2yt45qctn"]
+
+[ext_resource type="Script" uid="uid://bj2c280tnk4vk" path="res://character/quality/quality.gd" id="1_37rmy"]
+[ext_resource type="Script" uid="uid://786cogeb712" path="res://character/character_data.gd" id="2_yo1t7"]
+
+[resource]
+script = ExtResource("2_yo1t7")
+name = ""
+sprite_variant = 0
+qualities = Array[ExtResource("1_37rmy")]([])
+metadata/_custom_type_script = "uid://786cogeb712"
