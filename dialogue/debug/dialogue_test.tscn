@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhgd1k0eb8uph"]
+
+[ext_resource type="PackedScene" uid="uid://bvk6v808c4s8" path="res://player/player.tscn" id="1_3tlx4"]
+[ext_resource type="Texture2D" uid="uid://ckuyc7lexqd8c" path="res://icon.svg" id="2_6y5ye"]
+[ext_resource type="Script" uid="uid://76t38ghyga03" path="res://dialogue/debug/dialogue_tester.gd" id="2_lt7by"]
+[ext_resource type="Resource" uid="uid://dvu0q643j1tst" path="res://dialogue/test.dialogue" id="3_ye6r2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lt7by"]
+size = Vector2(94, 92)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_3tlx4")]
+position = Vector2(245, 297)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(492, 307)
+script = ExtResource("2_lt7by")
+dialogue = ExtResource("3_ye6r2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6y5ye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_lt7by")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
