@@ -8,11 +8,15 @@ class_name BuildGhost
 var overlap: bool = false
 
 
+func update_notifier(color: Color) -> void:
+	build_notifier.modulate = color
+
+
 func _on_area_entered(area: Area2D) -> void:
 	overlap = true
-	build_notifier.modulate = Color.RED
+	print_debug("Overlap detected with: %s" % area.name)
 
 
 func _on_area_exited(area: Area2D) -> void:
 	overlap = false
-	build_notifier.modulate = Color.GREEN
+	print_debug("Overlap ended with: %s" % area.name)
