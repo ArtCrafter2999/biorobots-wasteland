@@ -1,76 +1,50 @@
-[gd_scene load_steps=10 format=4 uid="uid://cliwlj4p8fni0"]
+[gd_scene load_steps=8 format=4 uid="uid://cliwlj4p8fni0"]
 
 [ext_resource type="Script" uid="uid://4oy2e4p583nt" path="res://truck/interior/interior_manager.gd" id="1_elx4q"]
 [ext_resource type="TileSet" uid="uid://kqdo4wati37y" path="res://truck/interior/temp_tileset.tres" id="1_mp3h0"]
-[ext_resource type="Texture2D" uid="uid://cjtqb5q1r5h1c" path="res://truck/interior/temp_tiles.png" id="2_20cop"]
 [ext_resource type="PackedScene" uid="uid://b6w5sp41x3yol" path="res://truck/interior/upgrades/bed.tscn" id="4_73hqn"]
+[ext_resource type="PackedScene" uid="uid://dsgb1cboxfm4" path="res://truck/interior/upgrades/generator.tscn" id="4_uf6vq"]
 [ext_resource type="PackedScene" uid="uid://ckhihuvs77xkd" path="res://truck/interior/upgrades/water_storage.tscn" id="5_mmuij"]
-[ext_resource type="PackedScene" uid="uid://bs4xxmb4byj2g" path="res://truck/interior/truck_interior_hud.tscn" id="6_mmuij"]
+[ext_resource type="PackedScene" uid="uid://bs4xxmb4byj2g" path="res://truck/interior/ui/truck_interior_hud.tscn" id="6_mmuij"]
+[ext_resource type="PackedScene" uid="uid://p3ydmpp4l4" path="res://truck/interior/upgrades/door.tscn" id="6_uf6vq"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_elx4q"]
-atlas = ExtResource("2_20cop")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_20cop"]
-size = Vector2(14, 14)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ritav"]
-atlas = ExtResource("2_20cop")
-region = Rect2(64, 0, 16, 16)
-
-[node name="TruckInterior" type="Node2D" node_paths=PackedStringArray("interior_hud", "floor_tilemap")]
+[node name="TruckInterior" type="Node2D" node_paths=PackedStringArray("interior_hud", "floor_tilemap", "equipment_parent")]
 script = ExtResource("1_elx4q")
 interior_hud = NodePath("CanvasLayer/TruckInteriorHud")
 floor_tilemap = NodePath("Floor")
+equipment_parent = NodePath("Upgrades")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TruckInteriorHud" parent="CanvasLayer" instance=ExtResource("6_mmuij")]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -478.0
-offset_top = -377.0
-offset_right = 473.0
-offset_bottom = 473.0
+offset_left = -426.0
+offset_top = -301.0
+offset_right = 525.0
+offset_bottom = 549.0
 color = Color(0.0475577, 0.0475577, 0.0475576, 1)
 
 [node name="Floor" type="TileMapLayer" parent="."]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAP//AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAP//AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAD///7/AAAAAAAAAAD///3/AAAAAAAAAAA=")
 tile_set = ExtResource("1_mp3h0")
 
 [node name="Upgrades" type="Node2D" parent="."]
 texture_filter = 1
 
-[node name="Generator" type="StaticBody2D" parent="Upgrades"]
-position = Vector2(-8, -40)
+[node name="Generator" parent="Upgrades" instance=ExtResource("4_uf6vq")]
+position = Vector2(0, -40)
 
-[node name="Sprite2D" type="Sprite2D" parent="Upgrades/Generator"]
-texture = SubResource("AtlasTexture_elx4q")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Upgrades/Generator"]
-shape = SubResource("RectangleShape2D_20cop")
-
-[node name="Bed" parent="Upgrades" instance=ExtResource("4_73hqn")]
-position = Vector2(40, 40)
-
-[node name="Bed2" parent="Upgrades" instance=ExtResource("4_73hqn")]
-position = Vector2(24, 40)
-
-[node name="Bed3" parent="Upgrades" instance=ExtResource("4_73hqn")]
-position = Vector2(8, 40)
-
-[node name="Door" type="StaticBody2D" parent="Upgrades"]
-position = Vector2(-24, 40)
-
-[node name="Sprite2D" type="Sprite2D" parent="Upgrades/Door"]
-texture = SubResource("AtlasTexture_ritav")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Upgrades/Door"]
-shape = SubResource("RectangleShape2D_20cop")
+[node name="Door" parent="Upgrades" instance=ExtResource("6_uf6vq")]
+position = Vector2(-32, 40)
 
 [node name="WaterStorage" parent="Upgrades" instance=ExtResource("5_mmuij")]
 position = Vector2(40, -40)
+
+[node name="Bed" parent="Upgrades" instance=ExtResource("4_73hqn")]
+position = Vector2(40, 40)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

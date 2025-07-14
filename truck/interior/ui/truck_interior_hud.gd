@@ -10,6 +10,7 @@ signal Upgrade_Deselected
 func _ready() -> void:
 	PlayerInventory.connect("Inventory_Updated", _update_counters)
 	_update_counters()
+	show()
 
 
 func _input(event: InputEvent) -> void:
@@ -28,6 +29,9 @@ func _update_counters() -> void:
 func _initiate_upgrade_list(truck_upgrades: Dictionary) -> void:
 	upgrades.clear()
 	for upgrade in truck_upgrades.keys():
+		if "cost" not in truck_upgrades[upgrade]:
+			continue
+
 		upgrades.add_item(
 			upgrade.capitalize() + " - " + str(truck_upgrades[upgrade]["cost"]) + "J",
 			truck_upgrades[upgrade]["icon"]
