@@ -1,7 +1,7 @@
 extends Node
 class_name Inventory
 
-signal Inventory_Updated(inventory: Dictionary)
+signal Inventory_Updated
 
 @export var inventory: Dictionary = {}
 
@@ -24,7 +24,7 @@ func remove_item(item: String, amount: int = 1) -> void:
 	Inventory_Updated.emit(inventory)
 
 
-func check_inventory(item: String, amount: int) -> bool:
-	var item_exists: bool = item in inventory and inventory[item] >= amount
-	print_debug("Checked inventory for %s %s: %s" % [amount, item, item_exists])
-	return item_exists
+func get_item_amount(item: String) -> float:
+	if item in inventory:
+		return inventory[item]
+	return 0

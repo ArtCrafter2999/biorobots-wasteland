@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dl6hupxe4f3na"]
+
+[ext_resource type="Texture2D" uid="uid://cjtqb5q1r5h1c" path="res://truck/interior/temp_tiles.png" id="1_h8mx3"]
+
+[resource]
+atlas = ExtResource("1_h8mx3")
+region = Rect2(48, 0, 16, 16)

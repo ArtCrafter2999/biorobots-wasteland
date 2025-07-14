@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckhihuvs77xkd"]
+
+[ext_resource type="Texture2D" uid="uid://dl6hupxe4f3na" path="res://truck/interior/upgrades/icons/water_storage.tres" id="1_syi1r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20cop"]
+size = Vector2(14, 14)
+
+[node name="WaterStorage" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_syi1r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_20cop")
