@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://kqdo4wati37y"]
+
+[ext_resource type="Texture2D" uid="uid://cjtqb5q1r5h1c" path="res://truck/interior/temp_tiles.png" id="1_uvpnm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_20cop"]
+resource_name = "temp_tiles"
+texture = ExtResource("1_uvpnm")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_20cop")

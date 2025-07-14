@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=4 uid="uid://cliwlj4p8fni0"]
+
+[ext_resource type="Script" uid="uid://4oy2e4p583nt" path="res://truck/interior/interior_manager.gd" id="1_elx4q"]
+[ext_resource type="TileSet" uid="uid://kqdo4wati37y" path="res://truck/interior/temp_tileset.tres" id="1_mp3h0"]
+[ext_resource type="Texture2D" uid="uid://cjtqb5q1r5h1c" path="res://truck/interior/temp_tiles.png" id="2_20cop"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elx4q"]
+atlas = ExtResource("2_20cop")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20cop"]
+size = Vector2(14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20cop"]
+atlas = ExtResource("2_20cop")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ritav"]
+atlas = ExtResource("2_20cop")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73hqn"]
+atlas = ExtResource("2_20cop")
+region = Rect2(48, 0, 16, 16)
+
+[node name="TruckInterior" type="Node2D"]
+script = ExtResource("1_elx4q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -478.0
+offset_top = -377.0
+offset_right = 473.0
+offset_bottom = 473.0
+color = Color(0.10748, 0.10748, 0.10748, 1)
+
+[node name="Floor" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAAAAP7/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAP//AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAD///3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAACAP3/AAAAAAAAAAACAP7/AAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wIAAAAAAAAAAAA=")
+tile_set = ExtResource("1_mp3h0")
+
+[node name="Equipment" type="Node2D" parent="."]
+texture_filter = 1
+
+[node name="Generator" type="StaticBody2D" parent="Equipment"]
+position = Vector2(-8, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Equipment/Generator"]
+texture = SubResource("AtlasTexture_elx4q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment/Generator"]
+shape = SubResource("RectangleShape2D_20cop")
+
+[node name="Bed" type="StaticBody2D" parent="Equipment"]
+position = Vector2(40, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Equipment/Bed"]
+texture = SubResource("AtlasTexture_20cop")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment/Bed"]
+shape = SubResource("RectangleShape2D_20cop")
+
+[node name="Bed2" type="StaticBody2D" parent="Equipment"]
+position = Vector2(24, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Equipment/Bed2"]
+texture = SubResource("AtlasTexture_20cop")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment/Bed2"]
+shape = SubResource("RectangleShape2D_20cop")
+
+[node name="Bed3" type="StaticBody2D" parent="Equipment"]
+position = Vector2(8, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Equipment/Bed3"]
+texture = SubResource("AtlasTexture_20cop")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment/Bed3"]
+shape = SubResource("RectangleShape2D_20cop")
+
+[node name="Door" type="StaticBody2D" parent="Equipment"]
+position = Vector2(-24, 40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Equipment/Door"]
+texture = SubResource("AtlasTexture_ritav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment/Door"]
+shape = SubResource("RectangleShape2D_20cop")
+
+[node name="WaterStorage" type="StaticBody2D" parent="Equipment"]
+position = Vector2(40, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="Equipment/WaterStorage"]
+texture = SubResource("AtlasTexture_73hqn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment/WaterStorage"]
+shape = SubResource("RectangleShape2D_20cop")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
