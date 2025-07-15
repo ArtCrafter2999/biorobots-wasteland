@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Biorobots-Wasteland"
-run/main_scene="uid://dra2fn8yb52qu"
+run/main_scene="uid://btojugxaph5d1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -79,8 +79,9 @@ locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue")
 
 [layer_names]
 
-2d_physics/layer_1="everything"
+2d_physics/layer_1="solid"
 2d_physics/layer_2="characters"
+2d_physics/layer_3="gatherable"
 
 [rendering]
 

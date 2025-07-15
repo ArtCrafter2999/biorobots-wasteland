@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://46pv2p61g5v8"]
+[gd_scene load_steps=4 format=3 uid="uid://46pv2p61g5v8"]
 
 [ext_resource type="Texture2D" uid="uid://cjtqb5q1r5h1c" path="res://truck/interior/temp_tiles.png" id="1_5l0w0"]
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_tjgln"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5l0w0"]
 radius = 6.0
 
 [node name="Tree" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_tjgln")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_5l0w0")

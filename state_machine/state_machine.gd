@@ -31,6 +31,8 @@ func _physics_process(delta: float) -> void:
 ## calls exit in prvious state and enters the provided new state
 ## you can provide additional context to the next state
 func change_state(new_state: StateBase, context: Dictionary = {}):
+	if not new_state:
+		return;
 	if state == new_state && !state.can_reenter:
 		return;
 	if state:

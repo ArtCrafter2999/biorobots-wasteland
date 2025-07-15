@@ -11,7 +11,7 @@ func _state_enter_c(context: Dictionary):
 	after_state = context[&"next_state"]
 
 func _physics_process(delta: float) -> void:
-	if global_position.distance_squared_to(target_position) < 0.01:
+	if global_position.distance_squared_to(target_position) < 1:
 		machine.change_state(after_state);
 		return;
 	var direction = global_position.direction_to(target_position)

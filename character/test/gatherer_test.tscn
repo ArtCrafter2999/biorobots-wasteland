@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjnty2ykc5025"]
+
+[ext_resource type="Script" uid="uid://dpiw10jmmjmqo" path="res://character/character.gd" id="1_flr25"]
+[ext_resource type="Texture2D" uid="uid://ckuyc7lexqd8c" path="res://icon.svg" id="2_8pm6d"]
+[ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="3_synbw"]
+[ext_resource type="Script" uid="uid://bch42es8bxw40" path="res://character/test/go_to_next_object_then_back.gd" id="4_hhwby"]
+[ext_resource type="Script" uid="uid://n2tyr4f3vap2" path="res://character/states/move_to_position_state.gd" id="5_iwl2r"]
+[ext_resource type="Script" uid="uid://b3wbkog8uakjo" path="res://character/test/test_gather_state.gd" id="6_ct1y4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l1n4"]
+size = Vector2(16, 16)
+
+[node name="GathererTest" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 2
+script = ExtResource("1_flr25")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_8pm6d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1l1n4")
+
+[node name="States" type="Node2D" parent="." node_paths=PackedStringArray("begining_state")]
+script = ExtResource("3_synbw")
+begining_state = NodePath("GoToNextObjectThenBack")
+
+[node name="GoToNextObjectThenBack" type="Node2D" parent="States" node_paths=PackedStringArray("go_to_state", "gather_state")]
+script = ExtResource("4_hhwby")
+go_to_state = NodePath("../MoveToPositionState")
+gather_state = NodePath("../TestGatherState")
+
+[node name="MoveToPositionState" type="Node2D" parent="States"]
+script = ExtResource("5_iwl2r")
+
+[node name="TestGatherState" type="Node2D" parent="States" node_paths=PackedStringArray("go_home_state")]
+script = ExtResource("6_ct1y4")
+go_home_state = NodePath("../GoToNextObjectThenBack")
+
+[node name="GatherableChecker" type="Area2D" parent="States/TestGatherState"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="States/TestGatherState/GatherableChecker"]
+shape = SubResource("RectangleShape2D_1l1n4")

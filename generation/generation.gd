@@ -1,27 +1,41 @@
 extends Node2D
 
-const TREE = preload("res://generation/tree.tscn")
+@export var pool: Array[PackedScene] = [] 
 
-@export var size: Vector2 = Vector2(1000, 1000);
-@export_range(1, 100) var difficulty: float = 10;
+@export var square_size: int = 1000;
+@export var value: float = 100;
+
+func _ready() -> void:
+	generate();
 
 func generate():
-	print("generation")
-	var difficulty_modifier = difficulty / 100
-	var points_number = randf_range(100, 120) / difficulty_modifier
-	if points_number > (size.x * size.y):
-		points_number = (size.x * size.y) - (size.x * size.y / 10)
-	var points = []
-	#return;
-	for i in range(points_number):
-		var started = false
-		var point: Vector2
-		while not started or point in points:
-			started = true;
-			point = Vector2(randi_range(0, size.x), randi_range(0, size.y)) \
-					.snapped(Vector2(16, 16)) - Vector2(size.x / 2, size.y / 2)
-		points.append(point)
-		#print(point)
-		var tree = TREE.instantiate() as Node2D
-		add_child(tree)
-		tree.position = point;
+	var value_left = value;
+	var taken_points: Array[Vector2] = [];
+	
+	while value_left > 0:
+		var gatherable = pool.pick_random().instantiate() as Gatherable
+		
+		var points: Array[Vector2] = []
+		var point: Vector2 
+		# check if any point overlap with already taken
+		while points.size() == 0 or points.any(func (p): p in taken_points):
+			# get random point in range
+			point = Vector2(randi_range(0, square_size), randi_range(0, square_size)) \
+					#snap to grid
+					.snapped(Vector2(16, 16)) \
+					# align to be centered
+					- (Vector2.ONE * square_size / 2)
+			points = [point]
+			for x in range(gatherable.tiles_size.x):
+				for y in range(gatherable.tiles_size.y):
+					#append point for each tile of space taken
+					points.append(Vector2(point.x + x, point.y + y))
+		
+		for p in points:
+			taken_points.append(p);
+		
+		add_child(gatherable)
+		gatherable.position = point;
+		# less value for futher objects
+		value_left -= gatherable.value * (point.distance_to(Vector2.ZERO) * 2 / square_size);
+	print("tree count " + str(get_child_count() -2))
