@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://cliwlj4p8fni0"]
+[gd_scene load_steps=7 format=4 uid="uid://cliwlj4p8fni0"]
 
 [ext_resource type="Script" uid="uid://4oy2e4p583nt" path="res://truck/interior/interior_manager.gd" id="1_elx4q"]
 [ext_resource type="TileSet" uid="uid://kqdo4wati37y" path="res://truck/interior/temp_tileset.tres" id="1_mp3h0"]
 [ext_resource type="PackedScene" uid="uid://b6w5sp41x3yol" path="res://truck/interior/upgrades/bed.tscn" id="4_73hqn"]
 [ext_resource type="PackedScene" uid="uid://dsgb1cboxfm4" path="res://truck/interior/upgrades/generator.tscn" id="4_uf6vq"]
-[ext_resource type="PackedScene" uid="uid://ckhihuvs77xkd" path="res://truck/interior/upgrades/water_storage.tscn" id="5_mmuij"]
 [ext_resource type="PackedScene" uid="uid://bs4xxmb4byj2g" path="res://truck/interior/ui/truck_interior_hud.tscn" id="6_mmuij"]
 [ext_resource type="PackedScene" uid="uid://p3ydmpp4l4" path="res://truck/interior/upgrades/door.tscn" id="6_uf6vq"]
 
@@ -39,9 +38,6 @@ position = Vector2(0, -40)
 
 [node name="Door" parent="Upgrades" instance=ExtResource("6_uf6vq")]
 position = Vector2(-32, 40)
-
-[node name="WaterStorage" parent="Upgrades" instance=ExtResource("5_mmuij")]
-position = Vector2(40, -40)
 
 [node name="Bed" parent="Upgrades" instance=ExtResource("4_73hqn")]
 position = Vector2(40, 40)

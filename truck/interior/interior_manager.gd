@@ -12,12 +12,6 @@ var equipment: Dictionary = {
 		"icon": preload("res://truck/interior/upgrades/icons/bed.tres"),
 		"size": Vector2(1, 1),
 	},
-	"water_storage": {
-		"cost": 15,
-		"scene": preload("res://truck/interior/upgrades/water_storage.tscn"),
-		"icon": preload("res://truck/interior/upgrades/icons/water_storage.tres"),
-		"size": Vector2(1, 1),
-	},
 }
 
 var build_mode: bool = false
@@ -70,6 +64,9 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		print_debug("PAUSE GAME")
+	
+	if Input.is_action_just_pressed("interact") and build_ghost:
+		place_upgrade()
 
 
 func _create_build_ghost(texture: AtlasTexture, size: Vector2) -> void:

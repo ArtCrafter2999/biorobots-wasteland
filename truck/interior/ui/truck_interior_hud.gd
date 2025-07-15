@@ -2,14 +2,18 @@ extends Control
 
 signal Upgrade_Selected(index: int)
 signal Upgrade_Deselected
+signal Next_Region
 
 @export var resource_counter: RichTextLabel
+@export var travel_cost: RichTextLabel
 @export var upgrades: ItemList
+@export var confirm_panel: Control
 
 
 func _ready() -> void:
 	PlayerInventory.connect("Inventory_Updated", _update_counters)
 	_update_counters()
+	confirm_panel.hide()
 	show()
 
 
@@ -20,10 +24,9 @@ func _input(event: InputEvent) -> void:
 		Upgrade_Deselected.emit()
 
 func _update_counters() -> void:
-	var energy: float = PlayerInventory.get_item_amount("energy")
-	var water: float = PlayerInventory.get_item_amount("water")
-	var junk: float = PlayerInventory.get_item_amount("junk")
-	resource_counter.text = "Energy - %s\nWater - %s\nJunk - %s" % [energy, water, junk]
+	var energy: int = int(PlayerInventory.get_item_amount("energy"))
+	var junk: int = int(PlayerInventory.get_item_amount("junk"))
+	resource_counter.text = "Energy - %s\nJunk - %s" % [energy, junk]
 
 
 func _initiate_upgrade_list(truck_upgrades: Dictionary) -> void:
@@ -40,3 +43,17 @@ func _initiate_upgrade_list(truck_upgrades: Dictionary) -> void:
 
 func _on_upgrade_selected(index: int) -> void:
 	Upgrade_Selected.emit(index)
+
+
+func _on_next_region_pressed() -> void:
+	confirm_panel.show()
+
+
+func _player_ready() -> void:
+	confirm_panel.hide()
+	Next_Region.emit()
+	print_debug("Next region confirmed.")
+
+
+func _player_not_ready() -> void:
+	confirm_panel.hide()

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xk5k6ueqgnb3" path="res://truck/interior/ui/truck_interior_hud.gd" id="1_wjej3"]
 
-[node name="TruckInteriorHud" type="Control" node_paths=PackedStringArray("resource_counter", "upgrades")]
+[node name="TruckInteriorHud" type="Control" node_paths=PackedStringArray("resource_counter", "upgrades", "confirm_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,32 +10,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wjej3")
-resource_counter = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ResourceCounter")
-upgrades = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Upgrades")
+resource_counter = NodePath("MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer/ResourceCounter")
+upgrades = NodePath("MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer/Upgrades")
+confirm_panel = NodePath("MarginContainer/VBoxContainer/ConfirmationPanel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 208.0
-offset_bottom = 334.0
+offset_bottom = 329.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 3
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
-theme_override_constants/margin_bottom = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+[node name="UpgradePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ResourceCounter" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/UpgradePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/UpgradePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="ResourceCounter" type="RichTextLabel" parent="MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Energy - 000
 Biomass - 000
@@ -43,14 +47,61 @@ Water - 000
 Junk - 000"
 fit_content = true
 
-[node name="Upgrades" type="ItemList" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Upgrades" type="ItemList" parent="MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 auto_height = true
-max_columns = 2
-icon_mode = 0
 
-[node name="UpgradeCost" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="UpgradeCost" type="RichTextLabel" parent="MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 fit_content = true
 
-[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Upgrades" to="." method="_on_upgrade_selected"]
+[node name="NextRegion" type="Button" parent="MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "NEXT REGION >>"
+
+[node name="ConfirmationPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ConfirmationPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Cost" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Travel Cost - 0E"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Are you sure you are ready?"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Yes" type="Button" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="No" type="Button" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer/Upgrades" to="." method="_on_upgrade_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer/NextRegion" to="." method="_on_next_region_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_player_ready"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer/HBoxContainer/No" to="." method="_player_not_ready"]
