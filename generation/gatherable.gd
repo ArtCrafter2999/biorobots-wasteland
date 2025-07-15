@@ -7,7 +7,7 @@ extends Area2D
 
 func gather(amount: float): 
 	var difference = value - amount;
-	if difference > 0:
+	if difference > 0.01:
 		value = difference
 		return amount
 	else:
