@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://cy3ph8o25c237"]
+
+[ext_resource type="Script" uid="uid://b2q10fjqsmsmh" path="res://character/classes/guard/guard.gd" id="1_l3oyb"]
+[ext_resource type="Texture2D" uid="uid://ckuyc7lexqd8c" path="res://icon.svg" id="2_wac3u"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wac3u"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_w1bfq"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_wot6i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b20pr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wac3u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb54t"]
+size = Vector2(16, 16)
+
+[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+input_pickable = true
+script = ExtResource("1_l3oyb")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+sprite_frames = SubResource("SpriteFrames_b20pr")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kb54t")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_wac3u")
+
+[node name="Movement" type="Node" parent="StateChart"]
+script = ExtResource("4_w1bfq")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Movement"]
+script = ExtResource("5_wot6i")
+
+[node name="MoveToPosition" type="Node" parent="StateChart/Movement"]
+script = ExtResource("5_wot6i")
+
+[node name="GuardPosition" type="Node" parent="StateChart/Movement"]
+script = ExtResource("5_wot6i")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
