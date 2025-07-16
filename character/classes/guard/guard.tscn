@@ -2,16 +2,17 @@
 
 [ext_resource type="Script" uid="uid://b2q10fjqsmsmh" path="res://character/classes/guard/guard.gd" id="1_l3oyb"]
 [ext_resource type="Texture2D" uid="uid://ulu1vorupakr" path="res://character/green_circle.png" id="2_w1bfq"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wac3u"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_wac3u"]
 [ext_resource type="SpriteFrames" uid="uid://ncc0pqrnhyfl" path="res://character/data/test_spriteframes.tres" id="3_wot6i"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_w1bfq"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_wot6i"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_wot6i"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_w1bfq"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_wot6i"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_wot6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kb54t"]
 size = Vector2(16, 16)
 
-[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("statechart", "sprite", "selected_notifier")]
+[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("statechart", "sprite", "selected_notifier") groups=["Characters"]]
+collision_layer = 3
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_l3oyb")

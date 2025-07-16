@@ -1,10 +1,9 @@
-extends CharacterBody2D
+extends CrewCharacter
 class_name CrewGuard
 
 signal Crew_Selected(member: CharacterBody2D)
 
 @export_category("Properties")
-@export var character_data: CharacterData
 @export var move_speed: float = 100.0
 @export_group("Nodes")
 @export var statechart: StateChart
@@ -39,6 +38,7 @@ func unselect_self() -> void:
 func _ready() -> void:
 	selected_notifier.hide()
 	sprite.sprite_frames = character_data.sprite_frames
+	print(GameState.qualities_pool)
 
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
@@ -69,4 +69,3 @@ func _on_move_to_position_state_physics_processing(_delta: float) -> void:
 		return
 
 	_handle_movement(_delta)
-
