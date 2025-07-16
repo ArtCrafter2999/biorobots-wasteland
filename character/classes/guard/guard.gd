@@ -10,6 +10,8 @@ class_name CharacterGuard
 
 var health: float = max_health
 
+var target_position: Vector2 = Vector2.ZERO
+
 
 func play_animation(animation: String):
 	sprite.play(animation)
@@ -18,7 +20,7 @@ func play_animation(animation: String):
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("interact"):
-		print_debug("Guard selected")
+		print_debug("%s selected" % character_data.name)
 
 
 # region STATES

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bduocn7gi8akt"]
+
+[ext_resource type="Texture2D" uid="uid://ckuyc7lexqd8c" path="res://icon.svg" id="1_i2714"]
+[ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
+[ext_resource type="Script" uid="uid://brqyhpdu4wvl1" path="res://region/scripts/enemy_manager.gd" id="2_ikbp5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcaam"]
+size = Vector2(64, 64)
+
+[node name="Region" type="Node2D"]
+
+[node name="Ground" type="TileMapLayer" parent="."]
+
+[node name="CrewManager" type="Node2D" parent="."]
+script = ExtResource("1_jcaam")
+
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource("2_ikbp5")
+
+[node name="Truck" type="Node2D" parent="."]
+position = Vector2(562, 306)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Truck"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_i2714")
+
+[node name="Area2D" type="Area2D" parent="Truck"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Truck/Area2D"]
+shape = SubResource("RectangleShape2D_jcaam")
