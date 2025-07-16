@@ -1,14 +1,96 @@
-[gd_scene load_steps=7 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=18 format=3 uid="uid://bduocn7gi8akt"]
 
-[ext_resource type="Texture2D" uid="uid://ckuyc7lexqd8c" path="res://icon.svg" id="1_i2714"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
 [ext_resource type="Script" uid="uid://brqyhpdu4wvl1" path="res://region/scripts/enemy_manager.gd" id="2_ikbp5"]
+[ext_resource type="Texture2D" uid="uid://bbg0m8v81ghqt" path="res://art/base/base_spritesheet.png" id="3_qd13p"]
 [ext_resource type="Script" uid="uid://dlinu8oxqo1vl" path="res://player/player.gd" id="4_qd13p"]
+[ext_resource type="PackedScene" uid="uid://fbp6dt4ycplp" path="res://enemies/enemy.tscn" id="5_5l3hp"]
 
 [sub_resource type="TileSet" id="TileSet_qd13p"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l3hp"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er52e"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mhg4"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah2l5"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw8mp"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd13p"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82ggj"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci2qf"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vxwk"]
+atlas = ExtResource("3_qd13p")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_82ggj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5l3hp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er52e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mhg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ah2l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw8mp")
+}],
+"loop": true,
+"name": &"move_h",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd13p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82ggj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ci2qf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vxwk")
+}],
+"loop": true,
+"name": &"move_v",
+"speed": 10.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcaam"]
-size = Vector2(64, 64)
+size = Vector2(15, 16)
 
 [node name="Region" type="Node2D"]
 
@@ -25,17 +107,24 @@ ground = NodePath("../Tilemaps/Ground")
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("2_ikbp5")
 
+[node name="Enemy" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(128, -69)
+
 [node name="Truck" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Truck"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Truck"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_i2714")
+sprite_frames = SubResource("SpriteFrames_82ggj")
+animation = &"move_h"
 
 [node name="Area2D" type="Area2D" parent="Truck"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Truck/Area2D"]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_jcaam")
 
 [node name="PlayerCam" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
 script = ExtResource("4_qd13p")

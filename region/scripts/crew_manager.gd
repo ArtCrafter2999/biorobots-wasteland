@@ -3,6 +3,7 @@ extends Node2D
 @export_group("Nodes")
 @export var truck: Node2D
 @export var ground: TileMapLayer
+@export var attack_area: Area2D
 
 @onready var crew_data: Array[CharacterData] = GameState.characters
 
