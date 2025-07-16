@@ -59,5 +59,7 @@ delay_in_seconds = "0.0"
 script = ExtResource("5_wot6i")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="state_entered" from="StateChart/Movement/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Movement/MoveToPosition" to="." method="_on_move_to_position_state_physics_processing"]

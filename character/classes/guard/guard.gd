@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name CrewGuard
 
 signal Crew_Selected(member: CharacterBody2D)
+signal Crew_Selection_Possible(is_possible: bool)
 
 @export_category("Properties")
 @export var character_data: CharacterData
@@ -41,9 +42,17 @@ func _ready() -> void:
 	sprite.sprite_frames = character_data.sprite_frames
 
 
-func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("interact"):
 		select_self()
+
+
+func _on_mouse_entered() -> void:
+	Crew_Selection_Possible.emit(true)
+
+
+func _on_mouse_exited() -> void:
+	Crew_Selection_Possible.emit(false)
 
 
 func _handle_movement(_delta: float) -> void:
@@ -69,4 +78,3 @@ func _on_move_to_position_state_physics_processing(_delta: float) -> void:
 		return
 
 	_handle_movement(_delta)
-
