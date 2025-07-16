@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Biorobots-Wasteland"
-run/main_scene="uid://btojugxaph5d1"
+run/main_scene="uid://bduocn7gi8akt"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,6 +28,10 @@ project/assembly_name="Biorobots-Wasteland"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
+
+[global_group]
+
+Characters=""
 
 [input]
 
@@ -80,7 +84,7 @@ locale/translations_pot_files=PackedStringArray("res://dialogue/test.dialogue")
 [layer_names]
 
 2d_physics/layer_1="solid"
-2d_physics/layer_2="characters"
+2d_physics/layer_2="crew"
 2d_physics/layer_3="gatherable"
 
 [rendering]

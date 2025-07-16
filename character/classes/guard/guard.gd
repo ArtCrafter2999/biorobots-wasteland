@@ -1,11 +1,10 @@
-extends CharacterBody2D
+extends CrewCharacter
 class_name CrewGuard
 
 signal Crew_Selected(member: CharacterBody2D)
 signal Crew_Selection_Possible(is_possible: bool)
 
 @export_category("Properties")
-@export var character_data: CharacterData
 @export var move_speed: float = 100.0
 @export var attack_range: float = 100.0
 @export_group("Nodes")

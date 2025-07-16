@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ek82mtjnkc8d"]
+
+[ext_resource type="Script" uid="uid://bkmh5mseq38ij" path="res://character/quality/affecting_gathering.gd" id="1_y2tnp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y2tnp"]
+radius = 100.0
+
+[node name="DemotivateGroup" type="Node2D"]
+script = ExtResource("1_y2tnp")
+key = "demotivate_group"
+
+[node name="Area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_y2tnp")
