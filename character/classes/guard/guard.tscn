@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cy3ph8o25c237"]
+[gd_scene load_steps=10 format=3 uid="uid://cy3ph8o25c237"]
 
 [ext_resource type="Script" uid="uid://b2q10fjqsmsmh" path="res://character/classes/guard/guard.gd" id="1_l3oyb"]
 [ext_resource type="Texture2D" uid="uid://ulu1vorupakr" path="res://character/green_circle.png" id="2_w1bfq"]
@@ -11,7 +11,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kb54t"]
 size = Vector2(16, 16)
 
-[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("statechart", "sprite", "selected_notifier") groups=["Characters"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wot6i"]
+radius = 80.0
+
+[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("statechart", "sprite", "selected_notifier", "attack_zone", "attack_timer") groups=["Characters"]]
 collision_layer = 3
 input_pickable = true
 motion_mode = 1
@@ -19,6 +22,8 @@ script = ExtResource("1_l3oyb")
 statechart = NodePath("StateChart")
 sprite = NodePath("AnimatedSprite2D")
 selected_notifier = NodePath("SelectNotifier")
+attack_zone = NodePath("AttackArea")
+attack_timer = NodePath("AttackTimer")
 
 [node name="SelectNotifier" type="Sprite2D" parent="."]
 texture = ExtResource("2_w1bfq")
@@ -30,6 +35,15 @@ animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kb54t")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_wot6i")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_wac3u")
@@ -56,9 +70,10 @@ to = NodePath("../../Idle")
 event = &"target_pos_reached"
 delay_in_seconds = "0.0"
 
-[node name="GuardPosition" type="Node" parent="StateChart/Movement"]
-script = ExtResource("5_wot6i")
-
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="state_entered" from="StateChart/Movement/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Movement/MoveToPosition" to="." method="_on_move_to_position_state_physics_processing"]
