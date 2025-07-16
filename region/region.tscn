@@ -17,8 +17,10 @@ size = Vector2(64, 64)
 [node name="Ground" type="TileMapLayer" parent="Tilemaps"]
 tile_set = SubResource("TileSet_qd13p")
 
-[node name="CrewManager" type="Node2D" parent="."]
+[node name="CrewManager" type="Node2D" parent="." node_paths=PackedStringArray("truck", "ground")]
 script = ExtResource("1_jcaam")
+truck = NodePath("../Truck")
+ground = NodePath("../Tilemaps/Ground")
 
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("2_ikbp5")

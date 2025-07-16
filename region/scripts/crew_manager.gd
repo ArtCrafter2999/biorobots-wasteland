@@ -11,21 +11,20 @@ var crew_scenes: Dictionary[StringName, PackedScene] = {
 	&"medic": null,
 	&"gatherer": null,
 }
-var seleted_crew: Array[CharacterBody2D] = []
+var selected_crew: Array[CharacterBody2D] = []
 
 
 func _ready() -> void:
+	GameState.characters.append(load("res://character/data/guard_steve.tres"))
 	_spawn_crew()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
 		_clear_selected_crew()
 	
-	if event.is_action_pressed("interact"):
-		var target_pos: Vector2 = get_global_mouse_position()
-		for crew_member in seleted_crew:
-			crew_member.target_position = target_pos
+	if Input.is_action_just_pressed("interact") and selected_crew.size() > 0:
+		_move_crew_to_pos(get_global_mouse_position())
 
 
 func _spawn_crew() -> void:
@@ -37,17 +36,23 @@ func _spawn_crew() -> void:
 		var crew_member_instance: CharacterBody2D = crew_member_scene.instantiate()
 		
 		crew_member_instance.character_data = crew_member
-		crew_member_instance.global_position = truck.global_position + Vector2(0, 25)
+		crew_member_instance.global_position = truck.global_position + Vector2(0, -70)
 		crew_member_instance.connect("Crew_Selected", _crew_member_selected)
 
 		add_child(crew_member_instance)
 
 
+func _move_crew_to_pos(pos: Vector2) -> void:
+	for crew_member in selected_crew:
+		crew_member.target_position = pos
+		crew_member.send_state_event("target_pos_set")
+
+
 func _crew_member_selected(member: CharacterBody2D) -> void:
-	seleted_crew.append(member)
+	selected_crew.append(member)
 
 
 func _clear_selected_crew() -> void:
-	for crew_member in seleted_crew:
+	for crew_member in selected_crew:
 		crew_member.unselect_self()
-	seleted_crew.clear()
+	selected_crew.clear()

@@ -38,12 +38,18 @@ func unselect_self() -> void:
 
 func _ready() -> void:
 	selected_notifier.hide()
+	sprite.sprite_frames = character_data.sprite_frames
 
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_action_pressed("interact"):
 		select_self()
 
+
+func _handle_movement(_delta: float) -> void:
+	var direction: Vector2 = global_position.direction_to(target_position)
+	velocity = direction * move_speed
+	move_and_slide()
 
 # region STATES
 
@@ -54,13 +60,13 @@ func _on_idle_state_entered() -> void:
 
 func _on_move_to_position_state_physics_processing(_delta: float) -> void:
 	if target_position == Vector2.ZERO:
-		print_debug("Target position is zero")
+		print_debug("%s's target position is zero" % character_data.name)
 		return
-	if global_position.distance_to(target_position) < 1:
+	if global_position.distance_to(target_position) < 5:
 		print_debug("Target position reached")
 		send_state_event("target_pos_reached")
+		target_position = Vector2.ZERO
 		return
 
-	var direction: Vector2 = global_position.direction_to(target_position)
-	velocity = direction * move_speed
-	move_and_slide()
+	_handle_movement(_delta)
+
