@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=19 format=3 uid="uid://bduocn7gi8akt"]
 
+[ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
 [ext_resource type="Script" uid="uid://brqyhpdu4wvl1" path="res://region/scripts/enemy_manager.gd" id="2_ikbp5"]
 [ext_resource type="Texture2D" uid="uid://bbg0m8v81ghqt" path="res://art/base/base_spritesheet.png" id="3_qd13p"]
@@ -93,6 +94,17 @@ animations = [{
 size = Vector2(15, 16)
 
 [node name="Region" type="Node2D"]
+
+[node name="TimeLimit" type="Timer" parent="."]
+wait_time = 180.0
+one_shot = true
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RegionHud" parent="CanvasLayer" node_paths=PackedStringArray("region_timer") instance=ExtResource("1_er52e")]
+visible = false
+region_timer = NodePath("../../TimeLimit")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 

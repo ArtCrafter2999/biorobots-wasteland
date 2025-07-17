@@ -55,6 +55,7 @@ func _move_crew_to_pos(pos: Vector2) -> void:
 			randf_range(-30, 30), randf_range(-30, 30)
 		)
 		crew_member.send_state_event("target_pos_set")
+	print_debug("Moved selected crew to pos %s" % pos)
 
 
 func _crew_member_selected(member: CharacterBody2D) -> void:
@@ -69,3 +70,4 @@ func _clear_selected_crew() -> void:
 	for crew_member in selected_crew:
 		crew_member.unselect_self()
 	selected_crew.clear()
+	print_debug("Cleared selected crew")
