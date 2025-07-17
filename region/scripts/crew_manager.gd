@@ -66,3 +66,4 @@ func _clear_selected_crew() -> void:
 	for crew_member in selected_crew:
 		crew_member.unselect_self()
 	selected_crew.clear()
+	print_debug("Cleared selected crew")

@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://rwf5n6dq2q0u"]
+
+[ext_resource type="Script" uid="uid://di0ftb3detedw" path="res://region/ui/region_hud.gd" id="1_qg4sy"]
+
+[node name="RegionHud" type="Control" node_paths=PackedStringArray("biomass_counter", "junk_counter", "time_counter")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qg4sy")
+biomass_counter = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BiomassCounter")
+junk_counter = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/JunkCounter")
+time_counter = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/Timer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 266.0
+offset_bottom = 82.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Timer" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sundown in 00s"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BiomassCounter" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Biomass - "
+fit_content = true
+
+[node name="JunkCounter" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Junk - "
+fit_content = true
