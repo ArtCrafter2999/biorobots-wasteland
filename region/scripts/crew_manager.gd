@@ -36,25 +36,22 @@ func _spawn_crew() -> void:
 		if crew_member_scene == null:
 			print_debug("No scene found for %s" % crew_member.character_class)
 			continue
-		var crew_member_instance: CharacterBody2D = crew_member_scene.instantiate()
+		var crew_member_instance: CrewCharacter = crew_member_scene.instantiate()
 		
 		crew_member_instance.character_data = crew_member
 		crew_member_instance.global_position = truck.global_position + Vector2(
 			randf_range(-50, 50), randf_range(50, 100)
 		)
 
-		crew_member_instance.connect("Crew_Selected", _crew_member_selected)
-		crew_member_instance.connect("Crew_Selection_Possible", _on_crew_selection_possible)
+		crew_member_instance.crew_selected.connect(_crew_member_selected)
+		crew_member_instance.crew_selection_possible.connect(_on_crew_selection_possible)
 
 		add_child(crew_member_instance)
 
 
 func _move_crew_to_pos(pos: Vector2) -> void:
-	for crew_member in selected_crew:
-		crew_member.target_position = pos + Vector2(
-			randf_range(-30, 30), randf_range(-30, 30)
-		)
-		crew_member.send_state_event("target_pos_set")
+	for crew_member: CrewCharacter in selected_crew:
+		crew_member.order(pos)
 
 
 func _crew_member_selected(member: CharacterBody2D) -> void:

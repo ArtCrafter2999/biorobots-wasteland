@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="CharacterData" load_steps=4 format=3 uid="uid://dj4nl26p1wmt1"]
+[gd_resource type="Resource" script_class="CharacterData" load_steps=3 format=3 uid="uid://dj4nl26p1wmt1"]
 
-[ext_resource type="Script" uid="uid://bj2c280tnk4vk" path="res://character/quality/quality.gd" id="1_ixcdu"]
 [ext_resource type="Script" uid="uid://786cogeb712" path="res://character/character_data.gd" id="2_ivklu"]
 [ext_resource type="SpriteFrames" uid="uid://ncc0pqrnhyfl" path="res://character/data/test_spriteframes.tres" id="3_38yw2"]
 
@@ -9,6 +8,6 @@ script = ExtResource("2_ivklu")
 name = "Steve"
 character_class = &"guard"
 max_health = 100.0
-qualities = Array[ExtResource("1_ixcdu")]([])
+qualities = Array[PackedScene]([])
 sprite_frames = ExtResource("3_38yw2")
 metadata/_custom_type_script = "uid://786cogeb712"

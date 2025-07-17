@@ -18,6 +18,8 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_7frlh")

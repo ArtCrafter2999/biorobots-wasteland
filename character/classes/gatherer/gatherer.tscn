@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgdgvvuud8oki"]
+
+[ext_resource type="Script" uid="uid://6snqu8ubdfl8" path="res://character/classes/gatherer/gatherer.gd" id="1_k7p76"]
+[ext_resource type="Texture2D" uid="uid://ulu1vorupakr" path="res://character/green_circle.png" id="2_ft48o"]
+[ext_resource type="SpriteFrames" uid="uid://ncc0pqrnhyfl" path="res://character/data/test_spriteframes.tres" id="3_704nl"]
+[ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_xvahf"]
+[ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="5_k7p76"]
+[ext_resource type="Script" uid="uid://buujxtsdmgb5a" path="res://character/states/order_state.gd" id="6_5edpq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb54t"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eowu6"]
+radius = 80.0
+
+[node name="Gatherer" type="CharacterBody2D" node_paths=PackedStringArray("order_state") groups=["Characters"]]
+collision_layer = 2
+collision_mask = 0
+input_pickable = true
+motion_mode = 1
+script = ExtResource("1_k7p76")
+order_state = NodePath("StateMachine/OrderState")
+
+[node name="SelectNotifier" type="Sprite2D" parent="."]
+texture = ExtResource("2_ft48o")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+sprite_frames = ExtResource("3_704nl")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kb54t")
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("begining_state", "fallback_state")]
+script = ExtResource("4_xvahf")
+begining_state = NodePath("IdleState")
+fallback_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_k7p76")
+
+[node name="AttackRange" type="Area2D" parent="StateMachine/IdleState"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/IdleState/AttackRange"]
+shape = SubResource("CircleShape2D_eowu6")
+
+[node name="OrderState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_state")]
+script = ExtResource("6_5edpq")
+after_state = NodePath("../IdleState")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

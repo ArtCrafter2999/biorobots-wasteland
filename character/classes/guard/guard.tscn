@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b2q10fjqsmsmh" path="res://character/classes/guard/guard.gd" id="1_l3oyb"]
 [ext_resource type="Texture2D" uid="uid://ulu1vorupakr" path="res://character/green_circle.png" id="2_w1bfq"]
-[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_wac3u"]
 [ext_resource type="SpriteFrames" uid="uid://ncc0pqrnhyfl" path="res://character/data/test_spriteframes.tres" id="3_wot6i"]
-[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_w1bfq"]
-[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_wot6i"]
-[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_wot6i"]
+[ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_8h8l6"]
+[ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="6_w1bfq"]
+[ext_resource type="Script" uid="uid://bvvoretk0r44" path="res://character/classes/guard/states/combat_state.gd" id="7_8h8l6"]
+[ext_resource type="Script" uid="uid://bdllus2ryruw0" path="res://character/classes/guard/states/guard_order_state.gd" id="7_wot6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kb54t"]
 size = Vector2(16, 16)
@@ -14,22 +14,18 @@ size = Vector2(16, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_wot6i"]
 radius = 80.0
 
-[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("statechart", "sprite", "selected_notifier", "attack_zone", "attack_timer") groups=["Characters"]]
+[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("order_state") groups=["Characters"]]
 collision_layer = 2
 collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_l3oyb")
-statechart = NodePath("StateChart")
-sprite = NodePath("AnimatedSprite2D")
-selected_notifier = NodePath("SelectNotifier")
-attack_zone = NodePath("AttackArea")
-attack_timer = NodePath("AttackTimer")
+order_state = NodePath("StateMachine/OrderState")
 
 [node name="SelectNotifier" type="Sprite2D" parent="."]
 texture = ExtResource("2_w1bfq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.125, 0.125)
 sprite_frames = ExtResource("3_wot6i")
 animation = &"idle"
@@ -37,44 +33,40 @@ animation = &"idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kb54t")
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("begining_state", "fallback_state")]
+script = ExtResource("4_8h8l6")
+begining_state = NodePath("IdleState")
+fallback_state = NodePath("IdleState")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-shape = SubResource("CircleShape2D_wot6i")
+[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("check_enter_states")]
+script = ExtResource("6_w1bfq")
+check_enter_states = [NodePath("../CombatState")]
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="OrderState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_state", "check_enter_states")]
+script = ExtResource("7_wot6i")
+circle_distance = 40.0
+after_state = NodePath("../IdleState")
+can_reenter = true
+check_enter_states = [NodePath("../CombatState")]
+
+[node name="CombatState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("order_state")]
+script = ExtResource("7_8h8l6")
+order_state = NodePath("../OrderState")
+
+[node name="AttackTimer" type="Timer" parent="StateMachine/CombatState"]
 wait_time = 0.3
 one_shot = true
 
-[node name="StateChart" type="Node" parent="."]
-script = ExtResource("3_wac3u")
+[node name="AttackRange" type="Area2D" parent="StateMachine/CombatState"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 
-[node name="Movement" type="Node" parent="StateChart"]
-script = ExtResource("4_w1bfq")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateChart/Movement"]
-script = ExtResource("5_wot6i")
-
-[node name="ToMoving" type="Node" parent="StateChart/Movement/Idle"]
-script = ExtResource("7_wot6i")
-to = NodePath("../../MoveToPosition")
-event = &"target_pos_set"
-delay_in_seconds = "0.0"
-
-[node name="MoveToPosition" type="Node" parent="StateChart/Movement"]
-script = ExtResource("5_wot6i")
-
-[node name="ToIdle" type="Node" parent="StateChart/Movement/MoveToPosition"]
-script = ExtResource("7_wot6i")
-to = NodePath("../../Idle")
-event = &"target_pos_reached"
-delay_in_seconds = "0.0"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/CombatState/AttackRange"]
+shape = SubResource("CircleShape2D_wot6i")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
-[connection signal="state_entered" from="StateChart/Movement/Idle" to="." method="_on_idle_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/Movement/MoveToPosition" to="." method="_on_move_to_position_state_physics_processing"]
+[connection signal="body_entered" from="StateMachine/CombatState/AttackRange" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="StateMachine/CombatState/AttackRange" to="." method="_on_attack_area_body_exited"]

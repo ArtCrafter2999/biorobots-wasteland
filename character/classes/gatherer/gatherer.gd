@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name CrewGatherer
+extends CrewCharacter
 
 const gathering_speed := 0.029
-var gathering_speed_modifier = 1;

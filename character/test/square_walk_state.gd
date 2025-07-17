@@ -1,6 +1,6 @@
 extends StateBase
 
-@export var move_to_position_state: StateBase;
+@export var move_to_position_state: MoveToPositionState;
 @export var square_side = 100;
 var side = 1
 
@@ -19,4 +19,5 @@ func _state_enter():
 		4:
 			target = Vector2(0, 0)
 			side = 1
-	machine.change_state(move_to_position_state, {&"position": target, &"next_state": self})
+	move_to_position_state.target_position = target
+	machine.change_state(move_to_position_state)

@@ -29,5 +29,6 @@ begining_state = NodePath("SquareWalk")
 script = ExtResource("3_hx151")
 move_to_position_state = NodePath("../MoveToPositionState")
 
-[node name="MoveToPositionState" type="Node2D" parent="States"]
+[node name="MoveToPositionState" type="Node2D" parent="States" node_paths=PackedStringArray("after_state")]
 script = ExtResource("4_0rvpn")
+after_state = NodePath("../SquareWalk")

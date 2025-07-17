@@ -6,6 +6,5 @@ class_name Enemy
 
 func take_damage(damage: float) -> void:
 	health -= damage
-	print_debug("Enemy health: %s" % health)
 	if health <= 0:
 		queue_free()

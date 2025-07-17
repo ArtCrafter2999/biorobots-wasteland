@@ -1,12 +1,12 @@
 extends StateBase
 
-@export var go_to_state: StateBase
+@export var go_to_state: MoveToPositionState
 @export var gather_state: StateBase
 
 var time: int = 0;
 var biomass: int = 0
 
-func _state_process():
+func _state_process(_delta: float):
 	await get_tree().process_frame
 	if global_position.distance_squared_to(Vector2.ZERO) < 1:
 		if time:
@@ -21,11 +21,11 @@ func _state_process():
 		var any_obj = objects[0] as Node2D
 		
 		if any_obj:
-			machine.change_state(go_to_state, { 
-					&"position": any_obj.position, 
-					&"next_state": gather_state})
+			go_to_state.target_position = any_obj.position
+			go_to_state.after_state = gather_state
+			machine.change_state(go_to_state)
 	else:
-		machine.change_state(go_to_state, { 
-				&"position": Vector2.ZERO, 
-				&"next_state": self})
+		go_to_state.target_position = Vector2.ZERO
+		go_to_state.after_state = self
+		machine.change_state(go_to_state)
 	time = Time.get_ticks_msec()
