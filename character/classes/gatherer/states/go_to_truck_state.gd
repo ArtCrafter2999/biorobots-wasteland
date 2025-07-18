@@ -5,6 +5,12 @@ extends StateBase
 @export var after_state: StateBase
 var truck: Node2D
 
+func _state_check_enter():
+	if is_equal_approx(gatherer.biomass, gatherer.max_biomass):
+		gatherer.biomass = gatherer.max_biomass;
+		return true;
+	return false;
+
 func _state_enter():
 	if not truck:
 		truck = get_tree().get_nodes_in_group("Truck")[0]

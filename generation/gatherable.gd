@@ -13,6 +13,9 @@ func gather(amount: float):
 	else:
 		var left = value;
 		value = 0;
-		queue_free();
-		print("free")
+		destroy
 		return left
+
+func destroy():
+	queue_free();
+	print("free")

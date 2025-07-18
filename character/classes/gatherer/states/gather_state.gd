@@ -18,6 +18,8 @@ func _state_check_enter():
 func _state_enter():
 	_pick_nearest_gatherable();
 	
+	gatherer.crew_manager.unselect_crew(gatherer)
+	
 	if not gatherable_target:
 		machine.change_state(no_gatherable_state);
 
@@ -35,8 +37,9 @@ func _state_process(delta: float):
 		machine.change_state(go_home_state)
 		return
 	gatherer.biomass += gatherable_target.gather(min(CrewGatherer.GATHERING_SPEED * delta, max_storage - gatherer.biomass))
-	if is_equal_approx(gatherer.biomass, 1):
-		machine.change_state(go_home_state)
+	if is_equal_approx(gatherable_target.value, 0):
+		gatherable_target.destroy();
+
 
 func _state_exit():
 	gatherable_target = null;

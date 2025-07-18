@@ -49,12 +49,16 @@ after_state = NodePath("../IdleState")
 can_reenter = true
 check_enter_states = [NodePath("../CombatState")]
 
+[node name="DullTimer" type="Timer" parent="StateMachine/OrderState"]
+wait_time = 0.2
+one_shot = true
+
 [node name="CombatState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("order_state")]
 script = ExtResource("7_8h8l6")
 order_state = NodePath("../OrderState")
 
 [node name="AttackTimer" type="Timer" parent="StateMachine/CombatState"]
-wait_time = 0.3
+wait_time = 0.1
 one_shot = true
 
 [node name="AttackRange" type="Area2D" parent="StateMachine/CombatState"]

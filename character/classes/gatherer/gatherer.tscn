@@ -45,14 +45,20 @@ fallback_state = NodePath("IdleState")
 script = ExtResource("5_k7p76")
 check_enter_states = [NodePath("../GatherState")]
 
-[node name="OrderState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_state")]
+[node name="OrderState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_state", "check_enter_states")]
 script = ExtResource("6_xvahf")
 after_state = NodePath("../IdleState")
+check_enter_states = [NodePath("../GoToTruckState")]
 
-[node name="GatherState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("go_home_state", "no_gatherable_state")]
+[node name="DullTimer" type="Timer" parent="StateMachine/OrderState"]
+wait_time = 0.1
+one_shot = true
+
+[node name="GatherState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("go_home_state", "no_gatherable_state", "check_enter_states")]
 script = ExtResource("7_k7p76")
 go_home_state = NodePath("../GoToTruckState")
 no_gatherable_state = NodePath("../IdleState")
+check_enter_states = [NodePath("../GoToTruckState")]
 
 [node name="GatherableChecker" type="Area2D" parent="StateMachine/GatherState"]
 collision_layer = 0
