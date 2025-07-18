@@ -2,6 +2,7 @@ class_name CrewCharacter
 extends CharacterBody2D
 
 signal crew_selected(member: CharacterBody2D)
+signal crew_unselected(member: CharacterBody2D)
 signal crew_selection_possible(is_possible: bool)
 
 @export var move_speed: float = 100.0
@@ -24,6 +25,8 @@ var character_id: int;
 var gathering_mulitpliers := {}
 var health_multipliers := {}
 var move_speed_multipliers := {}
+var is_selected := false
+var crew_manager: CrewManager;
 
 func _ready() -> void:
 	selected_notifier.hide()
@@ -31,14 +34,15 @@ func _ready() -> void:
 		sprite.sprite_frames = character_data.sprite_frames
 
 
-func select_self() -> void:
+func select() -> void:
 	crew_selected.emit(self)
 	selected_notifier.show()
+	is_selected = true;
 
-
-func unselect_self() -> void:
+func unselect() -> void:
+	crew_unselected.emit(self)
 	selected_notifier.hide()
-
+	is_selected = false;
 
 func move(direction: Vector2, state_multiplier: float = 1) -> void:
 	velocity = direction * move_speed * state_multiplier * \
@@ -63,7 +67,10 @@ func _on_mouse_exited() -> void:
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event.is_action_pressed("interact"):
-		select_self()
+		if is_selected:
+			crew_manager.unselect_crew(self);
+		else:
+			crew_manager.select_crew(self);
 
 
 func proximity_sort(nodes: Array[Node2D], from: Vector2 = global_position):

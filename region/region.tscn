@@ -288,7 +288,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcaam"]
-size = Vector2(15, 16)
+size = Vector2(32, 32)
 
 [node name="Region" type="Node2D"]
 
@@ -320,11 +320,11 @@ script = ExtResource("2_ikbp5")
 position = Vector2(128, -69)
 
 [node name="Truck" type="Node2D" parent="." groups=["Truck"]]
+z_index = -1
 scale = Vector2(2, 2)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Truck"]
-scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_82ggj")
 animation = &"move_h"
 

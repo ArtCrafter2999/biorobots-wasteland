@@ -1,3 +1,4 @@
+class_name CrewManager
 extends Node2D
 
 @export_group("Nodes")
@@ -15,7 +16,7 @@ func _ready() -> void:
 	_spawn_crew();
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("unselect_all"):
 		_clear_selected_crew()
 	
 	if event.is_action_pressed("interact") and selected_crew.size() > 0 and not selection_possible:
@@ -24,10 +25,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _spawn_crew() -> void:
 	for crew_member in GameState.get_instantiated_characters():
-		crew_member.crew_selected.connect(_crew_member_selected)
+		crew_member.crew_manager = self;
 		crew_member.crew_selection_possible.connect(_on_crew_selection_possible)
 
-		crew_member.global_position = Vector2(randf_range(-100, 100), randf_range(-50, 150))
+		crew_member.global_position = Vector2(randf_range(-100, 100), randf_range(-50, 50))
 		add_child(crew_member)
 
 		print_debug("Spawned crew member %s (%s)" % 
@@ -40,16 +41,22 @@ func _move_crew_to_pos(pos: Vector2) -> void:
 		crew_member.order(pos)
 
 
-func _crew_member_selected(member: CrewCharacter) -> void:
-	selected_crew.append(member)
-
+func select_crew(member: CrewCharacter) -> void:
+	if member:
+		selected_crew.append(member)
+		member.select();
+	
+func unselect_crew(member: CrewCharacter) -> void:
+	var index = selected_crew.find(member)
+	if index >= 0:
+		selected_crew.remove_at(index)
+		member.unselect();
 
 func _on_crew_selection_possible(is_possible: bool) -> void:
 	selection_possible = is_possible
 
-
 func _clear_selected_crew() -> void:
 	for crew_member in selected_crew:
-		crew_member.unselect_self()
+		crew_member.unselect()
 	selected_crew.clear()
 	print_debug("Cleared selected crew")

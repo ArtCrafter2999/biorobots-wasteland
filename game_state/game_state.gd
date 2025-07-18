@@ -31,7 +31,7 @@ var qualities_pool: Array[PackedScene]:
 
 
 func _ready() -> void:
-	generate_crew(3)
+	generate_crew(4)
 
 func get_instantiated_characters() -> Array[CrewCharacter]:
 	var instantiated_characters: Array[CrewCharacter] = []
