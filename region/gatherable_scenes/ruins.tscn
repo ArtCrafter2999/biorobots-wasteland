@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_pwxke"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m2iv5"]
-size = Vector2(64, 64)
+size = Vector2(32, 32)
 
 [node name="Ruins" type="Area2D"]
 script = ExtResource("1_m2iv5")
@@ -14,7 +14,6 @@ value = 0.0
 tiles_size = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
 texture = ExtResource("1_4i7q6")
 script = ExtResource("3_pwxke")
 type = "ruins"

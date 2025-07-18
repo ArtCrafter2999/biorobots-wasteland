@@ -338,7 +338,6 @@ position = Vector2(128, -69)
 
 [node name="Truck" type="Node2D" parent="." groups=["Truck"]]
 z_index = -1
-scale = Vector2(2, 2)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Truck"]

@@ -12,7 +12,6 @@ script = ExtResource("1_7sogr")
 tiles_size = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
 texture = ExtResource("2_hcm6f")
 script = ExtResource("3_yl2lb")
 type = "pond"
