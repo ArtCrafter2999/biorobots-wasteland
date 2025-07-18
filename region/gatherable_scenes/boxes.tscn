@@ -11,6 +11,7 @@ size = Vector2(32, 32)
 script = ExtResource("1_fexil")
 resource = "junk"
 value = 0.0
+tiles_size = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ey13v")

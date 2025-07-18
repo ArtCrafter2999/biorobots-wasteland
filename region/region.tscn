@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=39 format=3 uid="uid://bduocn7gi8akt"]
 
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
@@ -8,6 +8,23 @@
 [ext_resource type="Script" uid="uid://dlinu8oxqo1vl" path="res://player/player.gd" id="4_qd13p"]
 [ext_resource type="PackedScene" uid="uid://fbp6dt4ycplp" path="res://enemies/enemy.tscn" id="5_5l3hp"]
 [ext_resource type="PackedScene" uid="uid://btojugxaph5d1" path="res://generation/generation_test.tscn" id="7_6mhg4"]
+[ext_resource type="PackedScene" uid="uid://46pv2p61g5v8" path="res://generation/tree.tscn" id="9_jw7pc"]
+[ext_resource type="PackedScene" uid="uid://bce61133d2fof" path="res://region/gatherable_scenes/bones.tscn" id="10_vj84v"]
+[ext_resource type="PackedScene" uid="uid://jvw7jdo72tuf" path="res://region/gatherable_scenes/boxes.tscn" id="11_hakvv"]
+[ext_resource type="PackedScene" uid="uid://bcm1de1gni3ct" path="res://region/gatherable_scenes/broken_base.tscn" id="12_kasag"]
+[ext_resource type="PackedScene" uid="uid://bu5o54yf1w15c" path="res://region/gatherable_scenes/broken_building.tscn" id="13_4ns05"]
+[ext_resource type="PackedScene" uid="uid://cxvvyfgrl2pp7" path="res://region/gatherable_scenes/building.tscn" id="14_qjg56"]
+[ext_resource type="PackedScene" uid="uid://imbjxui4xr60" path="res://region/gatherable_scenes/bunker.tscn" id="15_utv4w"]
+[ext_resource type="PackedScene" uid="uid://dseoddx8jrbu4" path="res://region/gatherable_scenes/container.tscn" id="16_lopul"]
+[ext_resource type="PackedScene" uid="uid://c4cfx3tl5s5g4" path="res://region/gatherable_scenes/dead_tree.tscn" id="17_6pddo"]
+[ext_resource type="PackedScene" uid="uid://bu6u645injwd1" path="res://region/gatherable_scenes/dry_pond.tscn" id="18_jmu3e"]
+[ext_resource type="PackedScene" uid="uid://bxkgwuavnvdmd" path="res://region/gatherable_scenes/pond.tscn" id="19_fbdth"]
+[ext_resource type="PackedScene" uid="uid://bmdwrg45hfpau" path="res://region/gatherable_scenes/rocks.tscn" id="20_qvbbn"]
+[ext_resource type="PackedScene" uid="uid://h6pg8e1lx3i" path="res://region/gatherable_scenes/ruins.tscn" id="21_y8yod"]
+[ext_resource type="PackedScene" uid="uid://b7gsaavrq3ht1" path="res://region/gatherable_scenes/shrubs.tscn" id="22_rm88g"]
+[ext_resource type="PackedScene" uid="uid://d3owgcj1ccp7s" path="res://region/gatherable_scenes/solar_panel.tscn" id="23_fplg3"]
+[ext_resource type="PackedScene" uid="uid://tc5p3y07sa21" path="res://region/gatherable_scenes/tents.tscn" id="24_qiyki"]
+[ext_resource type="PackedScene" uid="uid://c1rhfawvxrfci" path="res://region/gatherable_scenes/well.tscn" id="25_jmq65"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ah2l5"]
 texture = ExtResource("2_6mhg4")
@@ -339,4 +356,5 @@ zoom = Vector2(2.5, 2.5)
 script = ExtResource("4_qd13p")
 
 [node name="GenerationTest" parent="." instance=ExtResource("7_6mhg4")]
+pool = Array[PackedScene]([ExtResource("9_jw7pc"), ExtResource("10_vj84v"), ExtResource("11_hakvv"), ExtResource("12_kasag"), ExtResource("13_4ns05"), ExtResource("14_qjg56"), ExtResource("15_utv4w"), ExtResource("16_lopul"), ExtResource("17_6pddo"), ExtResource("18_jmu3e"), ExtResource("19_fbdth"), ExtResource("20_qvbbn"), ExtResource("21_y8yod"), ExtResource("22_rm88g"), ExtResource("23_fplg3"), ExtResource("24_qiyki"), ExtResource("25_jmq65")])
 value = 50.0

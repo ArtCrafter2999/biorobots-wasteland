@@ -5,13 +5,15 @@
 [ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_qhmmb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1qyp"]
-size = Vector2(32, 32)
+size = Vector2(64, 64)
 
 [node name="DryPond" type="Area2D"]
 script = ExtResource("1_y1qyp")
 value = 0.0
+tiles_size = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("1_ek3nk")
 script = ExtResource("3_qhmmb")
 type = "dry_pond"

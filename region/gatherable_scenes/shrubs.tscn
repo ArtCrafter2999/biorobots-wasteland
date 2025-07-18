@@ -5,13 +5,15 @@
 [ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_io082"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epcgv"]
-size = Vector2(32, 32)
+size = Vector2(64, 64)
 
 [node name="Shrubs" type="Area2D"]
 script = ExtResource("1_2gjpr")
 value = 0.0
+tiles_size = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("2_xvarm")
 script = ExtResource("3_io082")
 type = "shrubs"
