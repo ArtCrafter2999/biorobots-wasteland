@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="3_synbw"]
 [ext_resource type="Script" uid="uid://bch42es8bxw40" path="res://character/test/go_to_next_object_then_back.gd" id="4_hhwby"]
 [ext_resource type="Script" uid="uid://n2tyr4f3vap2" path="res://character/states/move_to_position_state.gd" id="5_iwl2r"]
-[ext_resource type="Script" uid="uid://b3wbkog8uakjo" path="res://character/test/test_gather_state.gd" id="6_ct1y4"]
+[ext_resource type="Script" uid="uid://b3wbkog8uakjo" path="res://character/classes/gatherer/states/gather_state.gd" id="6_ct1y4"]
 [ext_resource type="Script" uid="uid://buujxtsdmgb5a" path="res://character/states/order_state.gd" id="7_w60ba"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1l1n4"]

@@ -27,7 +27,8 @@ var move_speed_multipliers := {}
 
 func _ready() -> void:
 	selected_notifier.hide()
-	sprite.sprite_frames = character_data.sprite_frames
+	if character_data.sprite_frames:
+		sprite.sprite_frames = character_data.sprite_frames
 
 
 func select_self() -> void:

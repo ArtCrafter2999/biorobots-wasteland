@@ -1,8 +1,13 @@
 class_name CharacterData
 extends Resource
 
+enum CharacterClass {
+	GATHERER,
+	GUARD
+}
+
 @export var name: String
-@export var character_class: StringName
+@export var character_class: CharacterClass
 @export var max_health: float = 100.0
 @export var qualities: Array[PackedScene] = []
 @export var sprite_frames: SpriteFrames

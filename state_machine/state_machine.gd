@@ -23,10 +23,10 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if !state: return
-	state._state_process(delta);
 	var other_state = state._state_check_other_enter()
 	if other_state: 
 		change_state(other_state)
+	state._state_process(delta);
 	
 func _physics_process(delta: float) -> void:
 	if !state: return

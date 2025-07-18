@@ -5,8 +5,7 @@ signal Inventory_Updated
 
 @export var inventory: Dictionary = {}
 
-
-func add_item(item: String, amount: int = 1) -> void:
+func add_item(item: String, amount: float = 1.0) -> void:
 	if item in inventory:
 		inventory[item] += amount
 	else:
