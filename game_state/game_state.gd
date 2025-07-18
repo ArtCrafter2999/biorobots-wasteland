@@ -1,10 +1,8 @@
 extends Node
 
-var crew_scenes: Dictionary[StringName, PackedScene] = {
-	&"guard": preload("res://character/classes/guard/guard.tscn"),
-	&"medic": null,
-	&"gatherer": null,
-	&"jobless": null,
+var crew_scenes: Dictionary[CharacterData.CharacterClass, PackedScene] = {
+	CharacterData.CharacterClass.GUARD: preload("res://character/classes/guard/guard.tscn"),
+	CharacterData.CharacterClass.GATHERER: preload("res://character/classes/gatherer/gatherer.tscn"),
 }
 
 var characters: Array[CharacterData] = []
@@ -32,6 +30,9 @@ var qualities_pool: Array[PackedScene]:
 		return scene_loads
 
 
+func _ready() -> void:
+	generate_crew(3)
+
 func get_instantiated_characters() -> Array[CrewCharacter]:
 	var instantiated_characters: Array[CrewCharacter] = []
 
@@ -46,3 +47,11 @@ func get_instantiated_characters() -> Array[CrewCharacter]:
 		instantiated_characters.append(crew_member_instance)
 
 	return instantiated_characters
+
+func generate_crew(amount: int):
+	for i in range(amount):
+		var character := CharacterData.new()
+		var random = CharacterData.CharacterClass.values().pick_random()
+		character.character_class = random
+		character.name = str(i)
+		characters.append(character)

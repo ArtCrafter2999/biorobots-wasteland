@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=22 format=3 uid="uid://bduocn7gi8akt"]
 
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
