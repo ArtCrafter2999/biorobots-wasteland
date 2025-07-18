@@ -17,7 +17,7 @@ var selection_possible: bool = false
 
 
 func _ready() -> void:
-	GameState.characters.append(load("res://character/data/guard_steve.tres"))
+	GameState.characters.append(load("res://character/data/guard_steve.tres")) # REMOVE THESE BEFORE BUILD
 	GameState.characters.append(load("res://character/data/guard_steve.tres"))
 	_spawn_crew()
 
