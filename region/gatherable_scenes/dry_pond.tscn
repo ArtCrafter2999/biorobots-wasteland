@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu6u645injwd1"]
+
+[ext_resource type="Texture2D" uid="uid://beakiymqpr5e6" path="res://region/dry_pond/dry_pond_3.tres" id="1_ek3nk"]
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_y1qyp"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_qhmmb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1qyp"]
+size = Vector2(32, 32)
+
+[node name="DryPond" type="Area2D"]
+script = ExtResource("1_y1qyp")
+value = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ek3nk")
+script = ExtResource("3_qhmmb")
+type = "dry_pond"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y1qyp")

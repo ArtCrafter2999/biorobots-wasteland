@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7gsaavrq3ht1"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_2gjpr"]
+[ext_resource type="Texture2D" uid="uid://bxb1gm2f4q4vx" path="res://region/shrubs/shrubs_6.tres" id="2_xvarm"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_io082"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epcgv"]
+size = Vector2(32, 32)
+
+[node name="Shrubs" type="Area2D"]
+script = ExtResource("1_2gjpr")
+value = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xvarm")
+script = ExtResource("3_io082")
+type = "shrubs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_epcgv")

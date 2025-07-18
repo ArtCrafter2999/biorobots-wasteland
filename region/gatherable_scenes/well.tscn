@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1rhfawvxrfci"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_xglyy"]
+[ext_resource type="Texture2D" uid="uid://b74rbxrlp20sb" path="res://art/environment/wasteland_objects.png" id="2_0yvyh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7uxk"]
+atlas = ExtResource("2_0yvyh")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epcgv"]
+size = Vector2(32, 32)
+
+[node name="Well" type="Area2D"]
+script = ExtResource("1_xglyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_o7uxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_epcgv")

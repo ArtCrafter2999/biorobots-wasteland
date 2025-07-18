@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxkgwuavnvdmd"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_7sogr"]
+[ext_resource type="Texture2D" uid="uid://drp2qmk72rx1y" path="res://region/pond/pond_4.tres" id="2_hcm6f"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_yl2lb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sogr"]
+size = Vector2(32, 32)
+
+[node name="Pond" type="Area2D"]
+script = ExtResource("1_7sogr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hcm6f")
+script = ExtResource("3_yl2lb")
+type = "pond"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7sogr")

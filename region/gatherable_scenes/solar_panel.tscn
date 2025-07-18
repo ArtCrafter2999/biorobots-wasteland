@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3owgcj1ccp7s"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_23cek"]
+[ext_resource type="Texture2D" uid="uid://b74rbxrlp20sb" path="res://art/environment/wasteland_objects.png" id="2_m48gg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpxcj"]
+atlas = ExtResource("2_m48gg")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epcgv"]
+size = Vector2(32, 32)
+
+[node name="SolarPanel" type="Area2D"]
+script = ExtResource("1_23cek")
+resource = "junk"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_gpxcj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_epcgv")

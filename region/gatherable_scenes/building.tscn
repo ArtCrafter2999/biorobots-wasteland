@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxvvyfgrl2pp7"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_86ypo"]
+[ext_resource type="Texture2D" uid="uid://c1cxjdwixfp83" path="res://region/building/building_15.tres" id="2_bjj7n"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_u5iiy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5y615"]
+size = Vector2(32, 32)
+
+[node name="Building" type="Area2D"]
+script = ExtResource("1_86ypo")
+resource = "junk"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("2_bjj7n")
+script = ExtResource("3_u5iiy")
+type = "building"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_5y615")

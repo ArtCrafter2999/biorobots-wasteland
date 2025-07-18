@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cdw1juou22mh1"]
+
+[ext_resource type="Texture2D" uid="uid://b74rbxrlp20sb" path="res://art/environment/wasteland_objects.png" id="1_y8c3r"]
+
+[resource]
+atlas = ExtResource("1_y8c3r")
+region = Rect2(64, 96, 32, 32)

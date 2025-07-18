@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmdwrg45hfpau"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_ykkw7"]
+[ext_resource type="Texture2D" uid="uid://gylh6ehf8k4u" path="res://region/rocks/rocks_2.tres" id="2_0gsco"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_k0k72"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epcgv"]
+size = Vector2(32, 32)
+
+[node name="Rocks" type="Area2D"]
+script = ExtResource("1_ykkw7")
+value = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0gsco")
+script = ExtResource("3_k0k72")
+type = "rocks"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_epcgv")

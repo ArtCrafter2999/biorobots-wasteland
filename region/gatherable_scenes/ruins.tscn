@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://h6pg8e1lx3i"]
+
+[ext_resource type="Texture2D" uid="uid://cx34bepw7drjc" path="res://region/ruins/ruins_14.tres" id="1_4i7q6"]
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_m2iv5"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_pwxke"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2iv5"]
+size = Vector2(32, 32)
+
+[node name="Ruins" type="Area2D"]
+script = ExtResource("1_m2iv5")
+resource = "junk"
+value = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4i7q6")
+script = ExtResource("3_pwxke")
+type = "ruins"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m2iv5")

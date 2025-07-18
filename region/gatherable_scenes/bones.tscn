@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bce61133d2fof"]
+
+[ext_resource type="Texture2D" uid="uid://b74rbxrlp20sb" path="res://art/environment/wasteland_objects.png" id="1_6boxj"]
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_rs14q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs14q"]
+atlas = ExtResource("1_6boxj")
+region = Rect2(288, 64, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epcgv"]
+size = Vector2(32, 32)
+
+[node name="Bones" type="Area2D"]
+script = ExtResource("1_rs14q")
+value = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_rs14q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_epcgv")

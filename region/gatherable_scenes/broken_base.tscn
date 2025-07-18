@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcm1de1gni3ct"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_gv6ui"]
+[ext_resource type="Texture2D" uid="uid://b74rbxrlp20sb" path="res://art/environment/wasteland_objects.png" id="1_ux74k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv6ui"]
+atlas = ExtResource("1_ux74k")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhrh8"]
+size = Vector2(32, 32)
+
+[node name="BrokenBase" type="Area2D"]
+script = ExtResource("1_gv6ui")
+resource = "junk"
+value = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_gv6ui")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qhrh8")

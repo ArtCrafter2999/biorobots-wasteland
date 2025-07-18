@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4cfx3tl5s5g4"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_vxeje"]
+[ext_resource type="Texture2D" uid="uid://b18qhdjihsywf" path="res://region/dead_tree/dead_tree_7.tres" id="2_vxeje"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_sitsw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0j4p"]
+size = Vector2(32, 32)
+
+[node name="DeadTree" type="Area2D"]
+script = ExtResource("1_vxeje")
+resource = "junk"
+value = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_vxeje")
+script = ExtResource("3_sitsw")
+type = "dead_tree"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e0j4p")

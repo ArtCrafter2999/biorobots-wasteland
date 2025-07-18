@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dseoddx8jrbu4"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_iq875"]
+[ext_resource type="Texture2D" uid="uid://77e1glmt7i6t" path="res://region/container/container_3.tres" id="2_7b5og"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_k6qpt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eddbl"]
+size = Vector2(32, 32)
+
+[node name="Container" type="Area2D"]
+script = ExtResource("1_iq875")
+resource = "junk"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7b5og")
+script = ExtResource("3_k6qpt")
+type = "container"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_eddbl")

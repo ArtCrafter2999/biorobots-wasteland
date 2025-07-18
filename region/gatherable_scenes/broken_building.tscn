@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu5o54yf1w15c"]
+
+[ext_resource type="Script" uid="uid://bpnw8d2hd3f4p" path="res://generation/gatherable.gd" id="1_3dm80"]
+[ext_resource type="Texture2D" uid="uid://cd2ipo8rfqpst" path="res://region/broken_building/broken_building_14.tres" id="2_53jub"]
+[ext_resource type="Script" uid="uid://gdu51upmyw03" path="res://generation/sprite_randomiser.gd" id="3_53jub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dm80"]
+size = Vector2(32, 32)
+
+[node name="BrokenBuilding" type="Area2D"]
+script = ExtResource("1_3dm80")
+resource = "junk"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_53jub")
+script = ExtResource("3_53jub")
+type = "broken_building"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3dm80")
