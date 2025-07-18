@@ -10,7 +10,6 @@ var equipment: Dictionary = {
 		"cost": 10,
 		"scene": preload("res://truck/interior/upgrades/bed.tscn"),
 		"icon": preload("res://truck/interior/upgrades/icons/bed.tres"),
-		"size": Vector2(1, 1),
 	},
 }
 
@@ -71,8 +70,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _spawn_characters() -> void:
-	for character in GameState.characters:
+	for character in GameState.get_instantiated_characters():
 		var spawn_pos: Vector2 = Vector2(randf_range(-150, 150), randf_range(-150, 150))
+		character.global_position = spawn_pos
+		add_child(character)
 
 
 func _create_build_ghost(texture: AtlasTexture, size: Vector2) -> void:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://8ebaugy1fhjs"]
 
 [ext_resource type="Script" uid="uid://cviegu58hwuku" path="res://character/classes/guard/bullet.gd" id="1_6hdax"]
-[ext_resource type="Texture2D" uid="uid://ulu1vorupakr" path="res://character/green_circle.png" id="1_v75ni"]
+[ext_resource type="Texture2D" uid="uid://c8lgxp82jru8g" path="res://art/characters/bullet.png" id="2_6hdax"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v75ni"]
 radius = 1.0
@@ -15,9 +15,8 @@ collision_mask = 0
 script = ExtResource("1_6hdax")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_v75ni")
+rotation = -1.57079
+texture = ExtResource("2_6hdax")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v75ni")
