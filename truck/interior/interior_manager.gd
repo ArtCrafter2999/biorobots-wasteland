@@ -42,6 +42,7 @@ func _ready() -> void:
 	interior_hud._initiate_upgrade_list(equipment)
 	interior_hud.connect("Upgrade_Selected", _on_upgrade_selected)
 	interior_hud.connect("Upgrade_Deselected", _on_upgrade_deselected)
+	_spawn_characters()
 
 
 func _process(_delta: float) -> void:
@@ -51,10 +52,10 @@ func _process(_delta: float) -> void:
 
 		if mouse_pos not in floor_tilemap.get_used_cells() or build_ghost.overlap:
 			valid_placement = false
-			build_ghost.update_notifier(Color.RED)
+			build_ghost.update_notifier(false)
 		else:
 			valid_placement = true
-			build_ghost.update_notifier(Color.GREEN)
+			build_ghost.update_notifier(true)
 
 		build_ghost.global_position = mouse_pos_on_map
 		if Input.is_action_just_pressed("interact"):
@@ -67,6 +68,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("interact") and build_ghost:
 		place_upgrade()
+
+
+func _spawn_characters() -> void:
+	for character in GameState.characters:
+		var spawn_pos: Vector2 = Vector2(randf_range(-150, 150), randf_range(-150, 150))
 
 
 func _create_build_ghost(texture: AtlasTexture, size: Vector2) -> void:

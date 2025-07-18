@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsgb1cboxfm4"]
+[gd_scene load_steps=5 format=3 uid="uid://dsgb1cboxfm4"]
 
-[ext_resource type="Texture2D" uid="uid://cjtqb5q1r5h1c" path="res://truck/interior/temp_tiles.png" id="1_n2sg1"]
+[ext_resource type="Texture2D" uid="uid://geyu5dqodvbk" path="res://art/base/rooms_spritesheet.png" id="1_n2sg1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elx4q"]
 atlas = ExtResource("1_n2sg1")
-region = Rect2(16, 0, 32, 16)
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2sg1"]
+atlas = ExtResource("1_n2sg1")
+region = Rect2(80, 0, 48, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20cop"]
-size = Vector2(30, 14)
+size = Vector2(81, 34)
 
 [node name="Generator" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_elx4q")
 
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-49, 0)
+texture = SubResource("AtlasTexture_n2sg1")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-20.5, 6)
 shape = SubResource("RectangleShape2D_20cop")

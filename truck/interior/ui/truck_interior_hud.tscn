@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xk5k6ueqgnb3" path="res://truck/interior/ui/truck_interior_hud.gd" id="1_wjej3"]
 
-[node name="TruckInteriorHud" type="Control" node_paths=PackedStringArray("resource_counter", "upgrades", "confirm_panel")]
+[node name="TruckInteriorHud" type="Control" node_paths=PackedStringArray("resource_counter", "travel_cost", "upgrades", "confirm_panel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wjej3")
 resource_counter = NodePath("MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer/ResourceCounter")
+travel_cost = NodePath("MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer/Cost")
 upgrades = NodePath("MarginContainer/VBoxContainer/UpgradePanel/MarginContainer/VBoxContainer/Upgrades")
 confirm_panel = NodePath("MarginContainer/VBoxContainer/ConfirmationPanel")
 
@@ -78,7 +79,7 @@ theme_override_constants/separation = 20
 
 [node name="Cost" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Travel Cost - 0E"
+text = "Travel Cost - 5E"
 fit_content = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer"]

@@ -5,14 +5,7 @@ extends Node2D
 @export var ground: TileMapLayer
 @export var attack_area: Area2D
 
-@onready var crew_data: Array[CharacterData] = GameState.characters
-
-var crew_scenes: Dictionary[StringName, PackedScene] = {
-	&"guard": preload("res://character/classes/guard/guard.tscn"),
-	&"medic": null,
-	&"gatherer": null,
-}
-var selected_crew: Array[CharacterBody2D] = []
+var selected_crew: Array[CrewCharacter] = []
 var selection_possible: bool = false
 
 
@@ -31,30 +24,24 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _spawn_crew() -> void:
-	for crew_member in crew_data:
-		var crew_member_scene: PackedScene = crew_scenes[crew_member.character_class]
-		if crew_member_scene == null:
-			print_debug("No scene found for %s" % crew_member.character_class)
-			continue
-		var crew_member_instance: CrewCharacter = crew_member_scene.instantiate()
-		
-		crew_member_instance.character_data = crew_member
-		crew_member_instance.global_position = truck.global_position + Vector2(
-			randf_range(-50, 50), randf_range(50, 100)
+	for crew_member in GameState.get_instantiated_characters():
+		crew_member.connect("Selected", _crew_member_selected)
+		crew_member.connect("Selection_Possible", _on_crew_selection_possible)
+
+		crew_member.global_position = Vector2(randf_range(-100, 100), randf_range(-50, 150))
+		add_child(crew_member)
+
+		print_debug("Spawned crew member %s (%s)" % 
+		[crew_member.character_data.name, crew_member.character_data.character_class]
 		)
-
-		crew_member_instance.crew_selected.connect(_crew_member_selected)
-		crew_member_instance.crew_selection_possible.connect(_on_crew_selection_possible)
-
-		add_child(crew_member_instance)
 
 
 func _move_crew_to_pos(pos: Vector2) -> void:
-	for crew_member: CrewCharacter in selected_crew:
+	for crew_member in selected_crew:
 		crew_member.order(pos)
 
 
-func _crew_member_selected(member: CharacterBody2D) -> void:
+func _crew_member_selected(member: CrewCharacter) -> void:
 	selected_crew.append(member)
 
 

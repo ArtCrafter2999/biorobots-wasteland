@@ -6,10 +6,15 @@ class_name BuildGhost
 @export var build_notifier: Sprite2D
 
 var overlap: bool = false
+var valid_icon: Texture2D = preload("res://truck/interior/upgrades/build_ghost/valid_placement_icon.tres")
+var invalid_icon: Texture2D = preload("res://truck/interior/upgrades/build_ghost/invalid_placement_icon.tres")
 
 
-func update_notifier(color: Color) -> void:
-	build_notifier.modulate = color
+func update_notifier(valid_placement: bool) -> void:
+	if valid_placement:
+		build_notifier.texture = valid_icon
+	else:
+		build_notifier.texture = invalid_icon
 
 
 func _on_area_entered(area: Area2D) -> void:

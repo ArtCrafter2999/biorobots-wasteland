@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dcntu2em7rfnj" path="res://truck/interior/upgrades/icons/bed.tres" id="1_16rb6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20cop"]
-size = Vector2(14, 14)
+size = Vector2(20, 19)
 
 [node name="Bed" type="Area2D"]
 
@@ -11,4 +11,5 @@ size = Vector2(14, 14)
 texture = ExtResource("1_16rb6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_20cop")
