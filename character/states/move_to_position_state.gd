@@ -7,7 +7,7 @@ var target_position: Vector2;
 @onready var character: CrewCharacter = $"../.."
 
 func _state_enter():
-	character.sprite.play("move")
+	character.animation_player.play("move")
 
 func _state_physics_process(_delta: float) -> void:
 	if global_position.distance_squared_to(target_position) < 1:

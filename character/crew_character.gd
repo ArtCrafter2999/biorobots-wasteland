@@ -16,8 +16,7 @@ signal crew_selection_possible(is_possible: bool)
 		character_data = value
 
 @export var order_state: OrderState;
-
-@onready var sprite: AnimatedSprite2D = $Sprite
+@onready var animation_player: Node2D = $Animation
 @onready var selected_notifier: Sprite2D = $SelectNotifier
 @onready var state_machine: StateMachine = $StateMachine
 
@@ -30,9 +29,6 @@ var crew_manager: CrewManager;
 
 func _ready() -> void:
 	selected_notifier.hide()
-	if character_data.sprite_frames:
-		sprite.sprite_frames = character_data.sprite_frames
-
 
 func select() -> void:
 	crew_selected.emit(self)

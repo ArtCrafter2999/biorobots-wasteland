@@ -3,7 +3,7 @@ extends StateBase
 @onready var character: CrewCharacter = $"../.."
 
 func _state_enter():
-	if not character.sprite:
+	if not character.animation_player:
 		await get_tree().process_frame
 	
-	character.sprite.play("idle")
+	character.animation_player.play("idle")

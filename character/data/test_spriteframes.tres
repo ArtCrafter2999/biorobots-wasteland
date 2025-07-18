@@ -1,12 +1,13 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://ncc0pqrnhyfl"]
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://ncc0pqrnhyfl"]
 
+[ext_resource type="Texture2D" uid="uid://cku5goj06o3mi" path="res://art/characters/character_templates_gatherer.png" id="1_jrmna"]
 [ext_resource type="Texture2D" uid="uid://ckuyc7lexqd8c" path="res://icon.svg" id="1_jyasm"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_jyasm")
+"texture": ExtResource("1_jrmna")
 }],
 "loop": true,
 "name": &"idle",

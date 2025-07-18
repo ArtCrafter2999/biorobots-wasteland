@@ -10,7 +10,6 @@ enum CharacterClass {
 @export var character_class: CharacterClass
 @export var max_health: float = 100.0
 @export var qualities: Array[PackedScene] = []
-@export var sprite_frames: SpriteFrames
 
 var current_health: float = max_health
 var is_dead: bool = false
