@@ -1,12 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://fbp6dt4ycplp"]
+[gd_scene load_steps=18 format=3 uid="uid://keefnivryct0"]
 
-[ext_resource type="Script" uid="uid://bs4xevocco57a" path="res://enemies/enemy.gd" id="1_7frlh"]
-[ext_resource type="Texture2D" uid="uid://djkbwcak2iar4" path="res://art/monsters/scorpion.png" id="2_7frlh"]
-[ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_wblph"]
-[ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_0dihh"]
-[ext_resource type="Script" uid="uid://dfawvmfy8jwhl" path="res://enemies/states/enemy_idle_state.gd" id="5_t6lld"]
-[ext_resource type="Script" path="res://enemies/states/walk_to_character_state.gd" id="6_mmdq3"]
-[ext_resource type="Script" path="res://enemies/attack_state.gd" id="7_jp7fx"]
+[ext_resource type="Script" uid="uid://bs4xevocco57a" path="res://enemies/enemy.gd" id="1_ee8js"]
+[ext_resource type="Texture2D" uid="uid://wtv6egppgo13" path="res://art/monsters/coyote.png" id="2_ptpju"]
+[ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_aj47o"]
+[ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_m56d2"]
+[ext_resource type="Script" uid="uid://dfawvmfy8jwhl" path="res://enemies/states/enemy_idle_state.gd" id="5_ktgwd"]
+[ext_resource type="Script" path="res://enemies/states/walk_to_character_state.gd" id="6_nrjdj"]
+[ext_resource type="Script" path="res://enemies/attack_state.gd" id="7_w7b82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fw1ev"]
 size = Vector2(16, 16)
@@ -141,21 +141,21 @@ radius = 100.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1sdgc"]
 radius = 6.0
 
-[node name="Scorpion" type="CharacterBody2D"]
+[node name="Cayote" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 8
 collision_mask = 0
 input_pickable = true
 motion_mode = 1
-script = ExtResource("1_7frlh")
+script = ExtResource("1_ee8js")
 move_speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fw1ev")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_7frlh")
-hframes = 6
+texture = ExtResource("2_ptpju")
+hframes = 4
 vframes = 3
 
 [node name="Animation" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprites")]
@@ -163,22 +163,22 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_07tka")
 }
-script = ExtResource("3_wblph")
+script = ExtResource("3_aj47o")
 sprites = [NodePath("../Sprite")]
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("begining_state", "fallback_state")]
-script = ExtResource("4_0dihh")
+script = ExtResource("4_m56d2")
 begining_state = NodePath("EnemyIdleState")
 fallback_state = NodePath("EnemyIdleState")
 
 [node name="EnemyIdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("check_enter_states")]
-script = ExtResource("5_t6lld")
+script = ExtResource("5_ktgwd")
 check_enter_states = [NodePath("../WalkToCharacterState")]
 
 [node name="IdleTimer" type="Timer" parent="StateMachine/EnemyIdleState"]
 
 [node name="WalkToCharacterState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("see_noone_state", "check_enter_states")]
-script = ExtResource("6_mmdq3")
+script = ExtResource("6_nrjdj")
 see_noone_state = NodePath("../EnemyIdleState")
 check_enter_states = [NodePath("../AttackState")]
 
@@ -194,7 +194,7 @@ shape = SubResource("CircleShape2D_mmdq3")
 one_shot = true
 
 [node name="AttackState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_attacking_state")]
-script = ExtResource("7_jp7fx")
+script = ExtResource("7_w7b82")
 after_attacking_state = NodePath("../WalkToCharacterState")
 
 [node name="AttackRange" type="Area2D" parent="StateMachine/AttackState"]
