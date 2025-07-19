@@ -1,88 +1,177 @@
-[gd_scene load_steps=20 format=3 uid="uid://bgdgvvuud8oki"]
+[gd_scene load_steps=22 format=3 uid="uid://bgdgvvuud8oki"]
 
 [ext_resource type="Script" uid="uid://6snqu8ubdfl8" path="res://character/classes/gatherer/gatherer.gd" id="1_k7p76"]
-[ext_resource type="Texture2D" uid="uid://ulu1vorupakr" path="res://character/green_circle.png" id="2_ft48o"]
-[ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/animation.gd" id="3_eowu6"]
+[ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_eowu6"]
 [ext_resource type="Texture2D" uid="uid://cku5goj06o3mi" path="res://art/characters/character_templates_gatherer.png" id="3_k7p76"]
+[ext_resource type="Shader" uid="uid://b43engelwcq2l" path="res://outline.gdshader" id="3_t37t2"]
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_xvahf"]
 [ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="5_k7p76"]
 [ext_resource type="Script" uid="uid://bpdegqb5nq7ls" path="res://character/classes/gatherer/states/gatherer_order_state.gd" id="6_xvahf"]
 [ext_resource type="Script" uid="uid://b3wbkog8uakjo" path="res://character/classes/gatherer/states/gather_state.gd" id="7_k7p76"]
 [ext_resource type="Script" uid="uid://baa2y7u8w1s62" path="res://character/classes/gatherer/states/go_to_truck_state.gd" id="8_5edpq"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l22er"]
+shader = ExtResource("3_t37t2")
+shader_parameter/color = Color(0.516667, 1, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_eowu6"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="Animation" id="Animation_5edpq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Head:frame_coords")
+tracks/0/path = NodePath("SubViewport/Sprites/Head:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 19)]
+"values": [Vector2i(0, 12)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/LeftArm:frame_coords")
+tracks/1/path = NodePath("SubViewport/Sprites/LeftArm:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 14)]
+"values": [Vector2i(0, 7)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/LeftLeg:frame_coords")
+tracks/2/path = NodePath("SubViewport/Sprites/LeftLeg:frame_coords")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 15)]
+"values": [Vector2i(0, 8)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/RightLeg:frame_coords")
+tracks/3/path = NodePath("SubViewport/Sprites/RightLeg:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 16)]
+"values": [Vector2i(0, 9)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/Body:frame_coords")
+tracks/4/path = NodePath("SubViewport/Sprites/Body:frame_coords")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 17)]
+"values": [Vector2i(0, 10)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/RightArm:frame_coords")
+tracks/5/path = NodePath("SubViewport/Sprites/RightArm:frame_coords")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 18)]
+"values": [Vector2i(0, 11)]
+}
+
+[sub_resource type="Animation" id="Animation_oi131"]
+resource_name = "death"
+length = 1.25003
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/Sprites/LeftArm:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 36), Vector2i(1, 36), Vector2i(2, 36), Vector2i(3, 36), Vector2i(4, 36)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/Sprites/LeftLeg:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 37), Vector2i(1, 37), Vector2i(2, 37), Vector2i(3, 37), Vector2i(4, 37)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/Sprites/RightLeg:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 38), Vector2i(1, 38), Vector2i(2, 38), Vector2i(3, 38), Vector2i(4, 38)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/Sprites/Body:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 39), Vector2i(1, 39), Vector2i(2, 39), Vector2i(3, 39), Vector2i(4, 39)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SubViewport/Sprites/RightArm:frame_coords")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 40), Vector2i(1, 40), Vector2i(2, 40), Vector2i(3, 40), Vector2i(4, 40)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubViewport/Sprites/Head:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 41), Vector2i(1, 41), Vector2i(2, 41), Vector2i(3, 41), Vector2i(4, 41)]
 }
 
 [sub_resource type="Animation" id="Animation_k7p76"]
@@ -93,7 +182,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Head:frame_coords")
+tracks/0/path = NodePath("SubViewport/Sprites/Head:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -105,7 +194,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/LeftArm:frame_coords")
+tracks/1/path = NodePath("SubViewport/Sprites/LeftArm:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -117,7 +206,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/LeftLeg:frame_coords")
+tracks/2/path = NodePath("SubViewport/Sprites/LeftLeg:frame_coords")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -129,7 +218,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/RightLeg:frame_coords")
+tracks/3/path = NodePath("SubViewport/Sprites/RightLeg:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -141,7 +230,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/Body:frame_coords")
+tracks/4/path = NodePath("SubViewport/Sprites/Body:frame_coords")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -153,7 +242,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/RightArm:frame_coords")
+tracks/5/path = NodePath("SubViewport/Sprites/RightArm:frame_coords")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -171,7 +260,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/LeftArm:frame_coords")
+tracks/0/path = NodePath("SubViewport/Sprites/LeftArm:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -183,7 +272,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/LeftLeg:frame_coords")
+tracks/1/path = NodePath("SubViewport/Sprites/LeftLeg:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -195,7 +284,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/RightLeg:frame_coords")
+tracks/2/path = NodePath("SubViewport/Sprites/RightLeg:frame_coords")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -207,7 +296,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/Body:frame_coords")
+tracks/3/path = NodePath("SubViewport/Sprites/Body:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -219,7 +308,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/RightArm:frame_coords")
+tracks/4/path = NodePath("SubViewport/Sprites/RightArm:frame_coords")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -231,7 +320,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/Head:frame_coords")
+tracks/5/path = NodePath("SubViewport/Sprites/Head:frame_coords")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -239,6 +328,83 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 12), Vector2i(1, 12), Vector2i(2, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_5ikcf"]
+resource_name = "injured"
+length = 0.250025
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/Sprites/Head:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/Sprites/LeftArm:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 43)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/Sprites/LeftLeg:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 44)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/Sprites/RightLeg:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 45)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SubViewport/Sprites/Body:frame_coords")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 46)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubViewport/Sprites/RightArm:frame_coords")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 47)]
 }
 
 [sub_resource type="Animation" id="Animation_t37t2"]
@@ -249,7 +415,7 @@ step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/LeftArm:frame_coords")
+tracks/0/path = NodePath("SubViewport/Sprites/LeftArm:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -261,7 +427,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/LeftLeg:frame_coords")
+tracks/1/path = NodePath("SubViewport/Sprites/LeftLeg:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -273,7 +439,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/RightLeg:frame_coords")
+tracks/2/path = NodePath("SubViewport/Sprites/RightLeg:frame_coords")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -285,7 +451,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/Body:frame_coords")
+tracks/3/path = NodePath("SubViewport/Sprites/Body:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -297,7 +463,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/RightArm:frame_coords")
+tracks/4/path = NodePath("SubViewport/Sprites/RightArm:frame_coords")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -309,7 +475,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/Head:frame_coords")
+tracks/5/path = NodePath("SubViewport/Sprites/Head:frame_coords")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -327,7 +493,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/LeftArm:frame_coords")
+tracks/0/path = NodePath("SubViewport/Sprites/LeftArm:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -339,7 +505,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/LeftLeg:frame_coords")
+tracks/1/path = NodePath("SubViewport/Sprites/LeftLeg:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -351,7 +517,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/RightLeg:frame_coords")
+tracks/2/path = NodePath("SubViewport/Sprites/RightLeg:frame_coords")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -363,7 +529,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/Body:frame_coords")
+tracks/3/path = NodePath("SubViewport/Sprites/Body:frame_coords")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -375,7 +541,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/RightArm:frame_coords")
+tracks/4/path = NodePath("SubViewport/Sprites/RightArm:frame_coords")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -387,7 +553,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/Head:frame_coords")
+tracks/5/path = NodePath("SubViewport/Sprites/Head:frame_coords")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -395,160 +561,6 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 26)]
-}
-
-[sub_resource type="Animation" id="Animation_oi131"]
-resource_name = "death"
-length = 1.25003
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/LeftArm:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 36), Vector2i(1, 36), Vector2i(2, 36), Vector2i(3, 36), Vector2i(4, 36)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/LeftLeg:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 37), Vector2i(1, 37), Vector2i(2, 37), Vector2i(3, 37), Vector2i(4, 37)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/RightLeg:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 38), Vector2i(1, 38), Vector2i(2, 38), Vector2i(3, 38), Vector2i(4, 38)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/Body:frame_coords")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 39), Vector2i(1, 39), Vector2i(2, 39), Vector2i(3, 39), Vector2i(4, 39)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/RightArm:frame_coords")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 40), Vector2i(1, 40), Vector2i(2, 40), Vector2i(3, 40), Vector2i(4, 40)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/Head:frame_coords")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 41), Vector2i(1, 41), Vector2i(2, 41), Vector2i(3, 41), Vector2i(4, 41)]
-}
-
-[sub_resource type="Animation" id="Animation_5ikcf"]
-resource_name = "injured"
-length = 0.250025
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Head:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 48)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/LeftArm:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 43)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/LeftLeg:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 44)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/RightLeg:frame_coords")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 45)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/Body:frame_coords")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 46)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprites/RightArm:frame_coords")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 47)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5edpq"]
@@ -569,6 +581,7 @@ size = Vector2(16, 16)
 radius = 40.0
 
 [node name="Gatherer" type="CharacterBody2D" node_paths=PackedStringArray("order_state") groups=["Characters"]]
+z_index = 1
 collision_layer = 2
 collision_mask = 0
 input_pickable = true
@@ -576,71 +589,78 @@ motion_mode = 1
 script = ExtResource("1_k7p76")
 order_state = NodePath("StateMachine/OrderState")
 
-[node name="SelectNotifier" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.0823529)
-texture = ExtResource("2_ft48o")
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_l22er")
+texture = SubResource("ViewportTexture_eowu6")
 
-[node name="Animation" type="Node2D" parent="."]
-script = ExtResource("3_eowu6")
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(16, 16)
 
-[node name="Sprites" type="Node2D" parent="."]
+[node name="Sprites" type="Node2D" parent="SubViewport"]
+position = Vector2(8, 8)
 
-[node name="LeftArm" type="Sprite2D" parent="Sprites"]
+[node name="LeftArm" type="Sprite2D" parent="SubViewport/Sprites"]
 modulate = Color(1, 1, 0, 1)
 texture = ExtResource("3_k7p76")
 hframes = 8
 vframes = 57
-frame = 112
+frame = 56
 
-[node name="LeftLeg" type="Sprite2D" parent="Sprites"]
+[node name="LeftLeg" type="Sprite2D" parent="SubViewport/Sprites"]
 modulate = Color(1, 1, 0, 1)
 texture = ExtResource("3_k7p76")
 hframes = 8
 vframes = 57
-frame = 120
+frame = 64
 
-[node name="RightLeg" type="Sprite2D" parent="Sprites"]
+[node name="RightLeg" type="Sprite2D" parent="SubViewport/Sprites"]
 modulate = Color(1, 1, 0, 1)
 texture = ExtResource("3_k7p76")
 hframes = 8
 vframes = 57
-frame = 128
+frame = 72
 
-[node name="Body" type="Sprite2D" parent="Sprites"]
+[node name="Body" type="Sprite2D" parent="SubViewport/Sprites"]
 modulate = Color(1, 1, 0, 1)
 texture = ExtResource("3_k7p76")
 hframes = 8
 vframes = 57
-frame = 136
+frame = 80
 
-[node name="RightArm" type="Sprite2D" parent="Sprites"]
+[node name="RightArm" type="Sprite2D" parent="SubViewport/Sprites"]
 modulate = Color(1, 1, 0, 1)
 texture = ExtResource("3_k7p76")
 hframes = 8
 vframes = 57
-frame = 144
+frame = 88
 
-[node name="Head" type="Sprite2D" parent="Sprites"]
+[node name="Head" type="Sprite2D" parent="SubViewport/Sprites"]
 modulate = Color(1, 1, 0, 1)
 texture = ExtResource("3_k7p76")
 hframes = 8
 vframes = 57
-frame = 152
+frame = 96
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
-root_node = NodePath("../..")
+[node name="Animation" type="AnimationPlayer" parent="SubViewport/Sprites" node_paths=PackedStringArray("sprites")]
+unique_name_in_owner = true
+root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_5edpq")
 }
+script = ExtResource("3_eowu6")
+sprites = [NodePath("../LeftArm"), NodePath("../LeftLeg"), NodePath("../RightLeg"), NodePath("../Body"), NodePath("../RightArm"), NodePath("../Head")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kb54t")
 debug_color = Color(0, 0.6, 0.701961, 0)
+metadata/_edit_lock_ = true
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("begining_state", "fallback_state")]
 script = ExtResource("4_xvahf")
 begining_state = NodePath("IdleState")
 fallback_state = NodePath("IdleState")
+metadata/_edit_lock_ = true
 
 [node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("check_enter_states")]
 script = ExtResource("5_k7p76")
@@ -669,6 +689,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/GatherState/GatherableChecker"]
 shape = SubResource("RectangleShape2D_kb54t")
 debug_color = Color(0, 0.6, 0.701961, 0)
+metadata/_edit_lock_ = true
 
 [node name="GatherableFinder" type="Area2D" parent="StateMachine/GatherState"]
 collision_layer = 0
@@ -678,6 +699,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/GatherState/GatherableFinder"]
 shape = SubResource("CircleShape2D_5edpq")
 debug_color = Color(0, 0.6, 0.701961, 0)
+metadata/_edit_lock_ = true
 
 [node name="GoToTruckState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_state")]
 script = ExtResource("8_5edpq")

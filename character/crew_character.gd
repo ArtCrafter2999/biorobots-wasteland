@@ -16,9 +16,10 @@ signal crew_selection_possible(is_possible: bool)
 		character_data = value
 
 @export var order_state: OrderState;
-@onready var animation_player: Node2D = $Animation
-@onready var selected_notifier: Sprite2D = $SelectNotifier
+@onready var animation_player: CharacterAnimation = %Animation
+@onready var selected_notifier: Node2D = $SelectNotifier
 @onready var state_machine: StateMachine = $StateMachine
+@onready var sprite: Sprite2D = $Sprite
 
 var character_id: int;
 var gathering_mulitpliers := {}
@@ -28,21 +29,27 @@ var is_selected := false
 var crew_manager: CrewManager;
 
 func _ready() -> void:
-	selected_notifier.hide()
+	#selected_notifier.hide()
+	sprite.use_parent_material = true;
 
 func select() -> void:
 	crew_selected.emit(self)
-	selected_notifier.show()
+	#selected_notifier.show()
+	sprite.use_parent_material = false;
 	is_selected = true;
 
 func unselect() -> void:
 	crew_unselected.emit(self)
-	selected_notifier.hide()
+	#selected_notifier.hide()
+	sprite.use_parent_material = true;
 	is_selected = false;
 
 func move(direction: Vector2, state_multiplier: float = 1) -> void:
 	velocity = direction * move_speed * state_multiplier * \
 			_get_multiplier(move_speed_multipliers)
+	if velocity:
+		animation_player.play("move")
+		animation_player.flip_h = velocity.x < 0;
 	move_and_slide()
 
 
