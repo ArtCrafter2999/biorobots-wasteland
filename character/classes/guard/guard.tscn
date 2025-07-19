@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cy3ph8o25c237"]
+[gd_scene load_steps=26 format=3 uid="uid://cy3ph8o25c237"]
 
 [ext_resource type="Script" uid="uid://b2q10fjqsmsmh" path="res://character/classes/guard/guard.gd" id="1_l3oyb"]
 [ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_8h8l6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="6_w1bfq"]
 [ext_resource type="Script" uid="uid://bvvoretk0r44" path="res://character/classes/guard/states/combat_state.gd" id="7_8h8l6"]
 [ext_resource type="Script" uid="uid://bdllus2ryruw0" path="res://character/classes/guard/states/guard_order_state.gd" id="7_wot6i"]
+[ext_resource type="FontFile" uid="uid://bwpwu85r22mhg" path="res://font/Minecraft_1.1.ttf" id="10_qpawh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qpawh"]
 shader = ExtResource("3_feut8")
@@ -883,6 +884,10 @@ size = Vector2(16, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_wot6i"]
 radius = 80.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_lsrw3"]
+font = ExtResource("10_qpawh")
+font_size = 8
+
 [node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("order_state") groups=["Characters"]]
 collision_layer = 2
 collision_mask = 0
@@ -996,6 +1001,28 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/CombatState/AttackRange"]
 shape = SubResource("CircleShape2D_wot6i")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="CharacterName" type="Label" parent="Control"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.0
+offset_top = -9.0
+offset_right = 15.0
+grow_horizontal = 2
+text = "Henry"
+label_settings = SubResource("LabelSettings_lsrw3")
+horizontal_alignment = 1
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

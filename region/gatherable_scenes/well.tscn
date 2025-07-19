@@ -8,7 +8,7 @@ atlas = ExtResource("2_0yvyh")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epcgv"]
-size = Vector2(32, 32)
+size = Vector2(13, 16)
 
 [node name="Well" type="Area2D"]
 collision_layer = 4
@@ -20,4 +20,5 @@ tiles_size = Vector2i(2, 2)
 texture = SubResource("AtlasTexture_o7uxk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
 shape = SubResource("RectangleShape2D_epcgv")

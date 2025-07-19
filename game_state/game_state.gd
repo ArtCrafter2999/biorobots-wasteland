@@ -48,6 +48,7 @@ func get_instantiated_characters() -> Array[CrewCharacter]:
 	return instantiated_characters
 
 func generate_crew(amount: int):
+	var names = load_names();
 	for i in range(amount):
 		var character := CharacterData.new()
 		#var ch_class = CharacterData.CharacterClass.values().pick_random()
@@ -55,6 +56,28 @@ func generate_crew(amount: int):
 			character.character_class = CharacterData.CharacterClass.GATHERER
 		else:
 			character.character_class = CharacterData.CharacterClass.GUARD
-		character.name = str(i)
+		character.name = names.pick_random()
 		character.generate_colors();
 		characters.append(character)
+
+
+
+func load_names() -> Array[String]:
+	var file = FileAccess.open("res://character/male_names.txt", FileAccess.READ)
+	
+	if file == null:
+		printerr("Failed to open file, Error: ", FileAccess.get_open_error())
+		return []
+	var loaded_names: Array[String] = []
+	while not file.eof_reached():
+		var line = file.get_line()
+		# Optionally, trim whitespace from the line
+		line = line.strip_escapes().strip_edges()
+		if not line.is_empty(): # Only add non-empty lines
+			loaded_names.append(line)
+	file.close()
+
+	if loaded_names.is_empty():
+		print("File is empty or contains only empty lines: ")
+	
+	return loaded_names

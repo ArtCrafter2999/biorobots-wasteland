@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ulu1vorupakr"
-path="res://.godot/imported/green_circle.png-d03650796859530b011e9db57799c59e.ctex"
+uid="uid://djkbwcak2iar4"
+path="res://.godot/imported/scorpion.png-b779c1205b65065feaa601c3a2717d5d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://character/green_circle.png"
-dest_files=["res://.godot/imported/green_circle.png-d03650796859530b011e9db57799c59e.ctex"]
+source_file="res://art/monsters/scorpion.png"
+dest_files=["res://.godot/imported/scorpion.png-b779c1205b65065feaa601c3a2717d5d.ctex"]
 
 [params]
 

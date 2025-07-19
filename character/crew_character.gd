@@ -20,6 +20,7 @@ signal crew_selection_possible(is_possible: bool)
 @onready var selected_notifier: Node2D = $SelectNotifier
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite
+@onready var character_name: Label = $Control/CharacterName
 
 var character_id: int;
 var gathering_mulitpliers := {}
@@ -39,6 +40,7 @@ func _ready() -> void:
 		(sprite.material as ShaderMaterial).get_shader_parameter("color");
 	(sprite.material as ShaderMaterial) \
 			.set_shader_parameter("color", default_outline);
+	character_name.text = character_data.name;
 
 
 func select() -> void:
