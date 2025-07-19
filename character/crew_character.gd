@@ -17,7 +17,6 @@ signal crew_selection_possible(is_possible: bool)
 
 @export var order_state: OrderState;
 @onready var animation_player: CharacterAnimation = %Animation
-@onready var selected_notifier: Node2D = $SelectNotifier
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite
 @onready var character_name: Label = $Control/CharacterName

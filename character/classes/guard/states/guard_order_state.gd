@@ -3,7 +3,6 @@ extends OrderState
 @export var circle_distance: float = 50;
 
 @onready var dull_timer: Timer = $DullTimer
-@onready var gatherers_check: Area2D = $GatherersCheck
 
 var positioned = false;
 var base_target_position: Vector2

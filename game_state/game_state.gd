@@ -60,8 +60,6 @@ func generate_crew(amount: int):
 		character.generate_colors();
 		characters.append(character)
 
-
-
 func load_names() -> Array[String]:
 	var file = FileAccess.open("res://character/male_names.txt", FileAccess.READ)
 	

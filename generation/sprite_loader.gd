@@ -2,36 +2,99 @@ extends Node
 
 var sprite_dir: String = "res://region/"
 var sprites: Dictionary[String, Array] = {
-	"building": [],
-	"broken_building": [],
-	"container": [],
-	"pond": [],
-	"dry_pond": [],
-	"dead_tree": [],
-	"boxes": [],
-	"ruins": [],
-	"rocks": [],
-	"shrubs": [],
+	"building": [
+		preload("res://region/building/building_1.tres"),
+		preload("res://region/building/building_2.tres"),
+		preload("res://region/building/building_3.tres"),
+		preload("res://region/building/building_4.tres"),
+		preload("res://region/building/building_5.tres"),
+		preload("res://region/building/building_6.tres"),
+		preload("res://region/building/building_7.tres"),
+		preload("res://region/building/building_8.tres"),
+		preload("res://region/building/building_9.tres"),
+		preload("res://region/building/building_10.tres"),
+		preload("res://region/building/building_11.tres"),
+		preload("res://region/building/building_12.tres"),
+		preload("res://region/building/building_13.tres"),
+		preload("res://region/building/building_14.tres"),
+		preload("res://region/building/building_15.tres"),
+		preload("res://region/building/building_16.tres"),
+	],
+	"broken_building": [
+		preload("res://region/broken_building/broken_building_1.tres"),
+		preload("res://region/broken_building/broken_building_2.tres"),
+		preload("res://region/broken_building/broken_building_3.tres"),
+		preload("res://region/broken_building/broken_building_4.tres"),
+		preload("res://region/broken_building/broken_building_5.tres"),
+		preload("res://region/broken_building/broken_building_6.tres"),
+		preload("res://region/broken_building/broken_building_7.tres"),
+		preload("res://region/broken_building/broken_building_8.tres"),
+		preload("res://region/broken_building/broken_building_9.tres"),
+		preload("res://region/broken_building/broken_building_10.tres"),
+		preload("res://region/broken_building/broken_building_11.tres"),
+		preload("res://region/broken_building/broken_building_12.tres"),
+		preload("res://region/broken_building/broken_building_13.tres"),
+		preload("res://region/broken_building/broken_building_14.tres"),
+	],
+	"container": [
+		preload("res://region/container/container_1.tres"),
+		preload("res://region/container/container_2.tres"),
+		preload("res://region/container/container_3.tres"),
+	],
+	"pond": [
+		preload("res://region/pond/pond_1.tres"),
+		preload("res://region/pond/pond_2.tres"),
+		preload("res://region/pond/pond_3.tres"),
+		preload("res://region/pond/pond_4.tres"),
+	],
+	"dry_pond": [
+		preload("res://region/dry_pond/dry_pond_1.tres"),
+		preload("res://region/dry_pond/dry_pond_2.tres"),
+		preload("res://region/dry_pond/dry_pond_3.tres"),
+	],
+	"dead_tree": [
+		preload("res://region/dead_tree/dead_tree_1.tres"),
+		preload("res://region/dead_tree/dead_tree_2.tres"),
+		preload("res://region/dead_tree/dead_tree_3.tres"),
+		preload("res://region/dead_tree/dead_tree_4.tres"),
+		preload("res://region/dead_tree/dead_tree_5.tres"),
+		preload("res://region/dead_tree/dead_tree_6.tres"),
+		preload("res://region/dead_tree/dead_tree_7.tres"),
+	],
+	"boxes": [
+		preload("res://region/boxes/boxes_1.tres"),
+		preload("res://region/boxes/boxes_2.tres"),
+		preload("res://region/boxes/boxes_3.tres"),
+		preload("res://region/boxes/boxes_4.tres"),
+		preload("res://region/boxes/boxes_5.tres"),
+		preload("res://region/boxes/boxes_6.tres"),
+	],
+	"ruins": [
+		preload("res://region/ruins/ruins_1.tres"),
+		preload("res://region/ruins/ruins_2.tres"),
+		preload("res://region/ruins/ruins_3.tres"),
+		preload("res://region/ruins/ruins_4.tres"),
+		preload("res://region/ruins/ruins_5.tres"),
+		preload("res://region/ruins/ruins_6.tres"),
+		preload("res://region/ruins/ruins_7.tres"),
+		preload("res://region/ruins/ruins_8.tres"),
+		preload("res://region/ruins/ruins_9.tres"),
+		preload("res://region/ruins/ruins_10.tres"),
+		preload("res://region/ruins/ruins_11.tres"),
+		preload("res://region/ruins/ruins_12.tres"),
+		preload("res://region/ruins/ruins_13.tres"),
+		preload("res://region/ruins/ruins_14.tres"),
+	],
+	"rocks": [
+		preload("res://region/rocks/rocks_1.tres"),
+		preload("res://region/rocks/rocks_2.tres"),
+	],
+	"shrubs": [
+		preload("res://region/shrubs/shrubs_1.tres"),
+		preload("res://region/shrubs/shrubs_2.tres"),
+		preload("res://region/shrubs/shrubs_3.tres"),
+		preload("res://region/shrubs/shrubs_4.tres"),
+		preload("res://region/shrubs/shrubs_5.tres"),
+		preload("res://region/shrubs/shrubs_6.tres"),
+	],
 }
-
-
-func _ready() -> void:
-	for key in sprites:
-		load_sprites(key)
-
-
-func load_sprites(key: String) -> void:
-	var dir_path: String = sprite_dir.path_join(key)
-	var dir = DirAccess.open(dir_path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir():
-				if file_name.get_extension() == "tres":
-					var full_path = sprite_dir.path_join(key).path_join(file_name)
-					sprites[key].append(load(full_path))
-			file_name = dir.get_next()
-		print_debug("Loaded %s sprites from \"%s\"" % [sprites[key].size(), dir_path])
-	else:
-		push_error("Invalid sprite dir: \"%s\"" % sprite_dir)
