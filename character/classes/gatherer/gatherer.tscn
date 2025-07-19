@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://bgdgvvuud8oki"]
 
 [ext_resource type="Script" uid="uid://6snqu8ubdfl8" path="res://character/classes/gatherer/gatherer.gd" id="1_k7p76"]
-[ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_eowu6"]
 [ext_resource type="Texture2D" uid="uid://b4ggbgx5goryr" path="res://art/characters/character_templates_guard_grayscale.png" id="3_l22er"]
 [ext_resource type="Shader" uid="uid://b43engelwcq2l" path="res://outline.gdshader" id="3_t37t2"]
+[ext_resource type="Script" uid="uid://cewionyonschi" path="res://character/crew_animation.gd" id="4_t37t2"]
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_xvahf"]
 [ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="5_k7p76"]
 [ext_resource type="Script" uid="uid://bpdegqb5nq7ls" path="res://character/classes/gatherer/states/gatherer_order_state.gd" id="6_xvahf"]
@@ -648,7 +648,7 @@ root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_5edpq")
 }
-script = ExtResource("3_eowu6")
+script = ExtResource("4_t37t2")
 sprites = [NodePath("../LeftArm"), NodePath("../LeftLeg"), NodePath("../RightLeg"), NodePath("../Body"), NodePath("../RightArm"), NodePath("../Head")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -662,24 +662,21 @@ begining_state = NodePath("IdleState")
 fallback_state = NodePath("IdleState")
 metadata/_edit_lock_ = true
 
-[node name="IdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("check_enter_states")]
+[node name="IdleState" type="Node2D" parent="StateMachine"]
 script = ExtResource("5_k7p76")
-check_enter_states = [NodePath("../GatherState")]
 
-[node name="OrderState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_state", "check_enter_states")]
+[node name="OrderState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_state")]
 script = ExtResource("6_xvahf")
 after_state = NodePath("../IdleState")
-check_enter_states = [NodePath("../GoToTruckState")]
 
 [node name="DullTimer" type="Timer" parent="StateMachine/OrderState"]
 wait_time = 0.1
 one_shot = true
 
-[node name="GatherState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("go_home_state", "no_gatherable_state", "check_enter_states")]
+[node name="GatherState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("go_home_state", "no_gatherable_state")]
 script = ExtResource("7_k7p76")
 go_home_state = NodePath("../GoToTruckState")
 no_gatherable_state = NodePath("../IdleState")
-check_enter_states = [NodePath("../GoToTruckState")]
 
 [node name="GatherableChecker" type="Area2D" parent="StateMachine/GatherState"]
 collision_layer = 0

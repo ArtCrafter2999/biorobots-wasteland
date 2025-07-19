@@ -840,7 +840,28 @@ ground = NodePath("../Tilemaps/Ground")
 script = ExtResource("2_ikbp5")
 
 [node name="Enemy" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
-position = Vector2(128, -69)
+position = Vector2(453, -136)
+
+[node name="Enemy2" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(141, -284)
+
+[node name="Enemy3" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(-209, -261)
+
+[node name="Enemy4" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(-380, -47)
+
+[node name="Enemy5" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(-346, 195)
+
+[node name="Enemy6" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(-117, 312)
+
+[node name="Enemy7" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(198, 300)
+
+[node name="Enemy8" parent="EnemyManager" instance=ExtResource("5_5l3hp")]
+position = Vector2(451, 168)
 
 [node name="PlayerCam" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)

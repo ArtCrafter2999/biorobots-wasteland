@@ -1,45 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://fbp6dt4ycplp"]
+[gd_scene load_steps=18 format=3 uid="uid://fbp6dt4ycplp"]
 
 [ext_resource type="Script" uid="uid://bs4xevocco57a" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://djkbwcak2iar4" path="res://art/monsters/scorpion.png" id="2_7frlh"]
+[ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_wblph"]
+[ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_0dihh"]
+[ext_resource type="Script" uid="uid://dfawvmfy8jwhl" path="res://enemies/states/enemy_idle_state.gd" id="5_t6lld"]
+[ext_resource type="Script" uid="uid://tvkm31r53crp" path="res://enemies/states/walk_to_character_state.gd" id="6_mmdq3"]
+[ext_resource type="Script" uid="uid://gx2cvisvyews" path="res://enemies/attack_state.gd" id="7_jp7fx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fw1ev"]
 size = Vector2(16, 16)
-
-[sub_resource type="Animation" id="Animation_a6vjd"]
-resource_name = "move"
-length = 1.50003
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_fqjtx"]
-resource_name = "idle"
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_wblph"]
 length = 0.001
@@ -58,7 +28,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_0dihh"]
 resource_name = "attack"
-loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -71,6 +40,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/AttackState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_t6lld"]
@@ -90,6 +73,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_fqjtx"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_mmdq3"]
 resource_name = "injured"
 loop_mode = 1
@@ -107,6 +107,24 @@ tracks/0/keys = {
 "values": [Vector2i(1, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_a6vjd"]
+resource_name = "move"
+length = 1.50003
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_07tka"]
 _data = {
 &"RESET": SubResource("Animation_wblph"),
@@ -117,12 +135,20 @@ _data = {
 &"move": SubResource("Animation_a6vjd")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mmdq3"]
+radius = 100.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1sdgc"]
+radius = 6.0
+
 [node name="Scorpion" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 8
 collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_7frlh")
+move_speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fw1ev")
@@ -132,9 +158,49 @@ texture = ExtResource("2_7frlh")
 hframes = 6
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Animation" type="AnimationPlayer" parent="." node_paths=PackedStringArray("sprites")]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_07tka")
 }
+script = ExtResource("3_wblph")
+sprites = [NodePath("../Sprite")]
 
-[node name="StateMachine" type="Node2D" parent="."]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("begining_state", "fallback_state")]
+script = ExtResource("4_0dihh")
+begining_state = NodePath("EnemyIdleState")
+fallback_state = NodePath("EnemyIdleState")
+
+[node name="EnemyIdleState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("check_enter_states")]
+script = ExtResource("5_t6lld")
+check_enter_states = [NodePath("../WalkToCharacterState")]
+
+[node name="IdleTimer" type="Timer" parent="StateMachine/EnemyIdleState"]
+
+[node name="WalkToCharacterState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("see_noone_state", "check_enter_states")]
+script = ExtResource("6_mmdq3")
+see_noone_state = NodePath("../EnemyIdleState")
+check_enter_states = [NodePath("../AttackState")]
+
+[node name="CharacterCheck" type="Area2D" parent="StateMachine/WalkToCharacterState"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/WalkToCharacterState/CharacterCheck"]
+shape = SubResource("CircleShape2D_mmdq3")
+
+[node name="NotInRangeTimer" type="Timer" parent="StateMachine/WalkToCharacterState"]
+one_shot = true
+
+[node name="AttackState" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("after_attacking_state")]
+script = ExtResource("7_jp7fx")
+after_attacking_state = NodePath("../WalkToCharacterState")
+
+[node name="AttackRange" type="Area2D" parent="StateMachine/AttackState"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateMachine/AttackState/AttackRange"]
+shape = SubResource("CircleShape2D_1sdgc")

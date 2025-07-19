@@ -1,11 +1,9 @@
 class_name CrewCharacter
-extends CharacterBody2D
+extends Character
 
 signal crew_selected(member: CharacterBody2D)
 signal crew_unselected(member: CharacterBody2D)
 signal crew_selection_possible(is_possible: bool)
-
-@export var move_speed: float = 100.0
 
 @export var character_data: CharacterData:
 	get:
@@ -16,10 +14,10 @@ signal crew_selection_possible(is_possible: bool)
 		character_data = value
 
 @export var order_state: OrderState;
-@onready var animation_player: CharacterAnimation = %Animation
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite
 @onready var character_name: Label = $Control/CharacterName
+@onready var animation: CrewAnimation = %Animation
 
 var character_id: int;
 var gathering_mulitpliers := {}
@@ -33,7 +31,7 @@ var default_outline = Color.BLACK
 func _ready() -> void:
 	#selected_notifier.hide()
 	#sprite.use_parent_material = true;
-	animation_player.character_data = character_data;
+	animation.character_data = character_data;
 	sprite.material = sprite.material.duplicate()
 	selection_color = \
 		(sprite.material as ShaderMaterial).get_shader_parameter("color");
@@ -41,6 +39,8 @@ func _ready() -> void:
 			.set_shader_parameter("color", default_outline);
 	character_name.text = character_data.name;
 
+func move(direction: Vector2, state_multiplier: float = 1):
+	super.move(direction, state_multiplier * _get_multiplier(move_speed_multipliers))
 
 func select() -> void:
 	crew_selected.emit(self)
@@ -56,14 +56,6 @@ func unselect() -> void:
 	(sprite.material as ShaderMaterial) \
 			.set_shader_parameter("color", default_outline);
 	is_selected = false;
-
-func move(direction: Vector2, state_multiplier: float = 1) -> void:
-	velocity = direction * move_speed * state_multiplier * \
-			_get_multiplier(move_speed_multipliers)
-	if velocity:
-		animation_player.play("move")
-		animation_player.flip_h = velocity.x < 0;
-	move_and_slide()
 
 
 func _get_multiplier(dictionary: Dictionary):
@@ -88,13 +80,6 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		else:
 			crew_manager.select_crew(self);
 
-
-func proximity_sort(nodes: Array[Node2D], from: Vector2 = global_position):
-	nodes.sort_custom(func(node_a, node_b):
-		var distance_a = node_a.global_position.distance_to(from)
-		var distance_b = node_b.global_position.distance_to(from)
-		return distance_a < distance_b
-	)
 
 func order(target_position: Vector2):
 	order_state.target_position = target_position

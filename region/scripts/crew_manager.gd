@@ -37,8 +37,12 @@ func _spawn_crew() -> void:
 
 
 func _move_crew_to_pos(pos: Vector2) -> void:
+	selected_crew = selected_crew.filter(func (crew): 
+			return crew and is_instance_valid(crew)
+	);
 	for crew_member in selected_crew:
-		crew_member.order(pos)
+		if crew_member:
+			crew_member.order(pos)
 
 
 func select_crew(member: CrewCharacter) -> void:

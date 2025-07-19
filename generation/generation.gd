@@ -39,4 +39,4 @@ func generate():
 		# less value for futher objects
 		if gatherable.resource == "biomass":
 			value_left -= gatherable.value * (point.distance_to(Vector2.ZERO) * 2 / square_size);
-	print("tree count " + str(get_child_count() -2))
+	print("objects count " + str(get_child_count() -2))

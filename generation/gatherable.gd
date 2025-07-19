@@ -18,4 +18,3 @@ func gather(amount: float):
 
 func destroy():
 	queue_free();
-	print("free")
