@@ -21,7 +21,7 @@ script = ExtResource("1_6hdax")
 speed_curve = SubResource("Curve_6hdax")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_6hdax")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

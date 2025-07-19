@@ -1,15 +1,14 @@
-[gd_scene load_steps=40 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=39 format=3 uid="uid://bduocn7gi8akt"]
 
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
 [ext_resource type="Texture2D" uid="uid://dghwl7o25wwer" path="res://art/environment/wasteland_tilemap.png" id="2_6mhg4"]
 [ext_resource type="Script" uid="uid://brqyhpdu4wvl1" path="res://region/scripts/enemy_manager.gd" id="2_ikbp5"]
 [ext_resource type="Texture2D" uid="uid://bbg0m8v81ghqt" path="res://art/base/base_spritesheet.png" id="3_qd13p"]
-[ext_resource type="Script" uid="uid://dc6o1j0d0wenv" path="res://generation/ground_gen.gd" id="3_vj84v"]
+[ext_resource type="Script" path="res://generation/ground_gen.gd" id="3_vj84v"]
 [ext_resource type="Script" uid="uid://dlinu8oxqo1vl" path="res://player/player.gd" id="4_qd13p"]
 [ext_resource type="PackedScene" uid="uid://fbp6dt4ycplp" path="res://enemies/enemy.tscn" id="5_5l3hp"]
 [ext_resource type="PackedScene" uid="uid://btojugxaph5d1" path="res://generation/generation_test.tscn" id="7_6mhg4"]
-[ext_resource type="PackedScene" uid="uid://46pv2p61g5v8" path="res://generation/tree.tscn" id="9_jw7pc"]
 [ext_resource type="PackedScene" uid="uid://bce61133d2fof" path="res://region/gatherable_scenes/bones.tscn" id="10_vj84v"]
 [ext_resource type="PackedScene" uid="uid://jvw7jdo72tuf" path="res://region/gatherable_scenes/boxes.tscn" id="11_hakvv"]
 [ext_resource type="PackedScene" uid="uid://bcm1de1gni3ct" path="res://region/gatherable_scenes/broken_base.tscn" id="12_kasag"]
@@ -819,6 +818,7 @@ tile_set = SubResource("TileSet_qd13p")
 script = ExtResource("3_vj84v")
 
 [node name="Truck" type="Node2D" parent="." groups=["Truck"]]
+z_index = 1
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Truck"]
@@ -847,5 +847,5 @@ zoom = Vector2(2.5, 2.5)
 script = ExtResource("4_qd13p")
 
 [node name="GenerationTest" parent="." instance=ExtResource("7_6mhg4")]
-pool = Array[PackedScene]([ExtResource("9_jw7pc"), ExtResource("10_vj84v"), ExtResource("11_hakvv"), ExtResource("12_kasag"), ExtResource("13_4ns05"), ExtResource("14_qjg56"), ExtResource("15_utv4w"), ExtResource("16_lopul"), ExtResource("17_6pddo"), ExtResource("18_jmu3e"), ExtResource("19_fbdth"), ExtResource("20_qvbbn"), ExtResource("21_y8yod"), ExtResource("22_rm88g"), ExtResource("23_fplg3"), ExtResource("24_qiyki"), ExtResource("25_jmq65")])
+pool = Array[PackedScene]([ExtResource("10_vj84v"), ExtResource("11_hakvv"), ExtResource("12_kasag"), ExtResource("13_4ns05"), ExtResource("14_qjg56"), ExtResource("15_utv4w"), ExtResource("16_lopul"), ExtResource("17_6pddo"), ExtResource("18_jmu3e"), ExtResource("19_fbdth"), ExtResource("20_qvbbn"), ExtResource("21_y8yod"), ExtResource("22_rm88g"), ExtResource("23_fplg3"), ExtResource("24_qiyki"), ExtResource("25_jmq65")])
 value = 50.0

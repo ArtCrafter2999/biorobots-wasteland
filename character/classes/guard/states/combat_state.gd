@@ -30,7 +30,7 @@ func shoot():
 
 	var attack_direction: Vector2 = global_position.direction_to(target.global_position)
 
-	for i in range(randi_range(7, 8)):
+	for i in range(randi_range(4,5)):
 		var bullet: CharacterBody2D = bullet_scene.instantiate()
 		
 		# --- Add Spread ---

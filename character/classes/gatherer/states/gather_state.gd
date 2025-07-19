@@ -25,6 +25,7 @@ func _state_enter():
 		machine.change_state(no_gatherable_state);
 
 func _state_process(delta: float):
+	gatherer.animation_player.play("gather")
 	if not gatherable_target:
 		_pick_nearest_gatherable();
 		if not gatherable_target:

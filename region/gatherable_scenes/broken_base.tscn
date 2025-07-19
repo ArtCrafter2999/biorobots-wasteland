@@ -14,7 +14,6 @@ size = Vector2(32, 32)
 script = ExtResource("1_gv6ui")
 resource = "junk"
 value = 3.0
-tiles_size = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_gv6ui")

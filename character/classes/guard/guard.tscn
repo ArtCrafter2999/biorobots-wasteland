@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cy3ph8o25c237"]
+[gd_scene load_steps=24 format=3 uid="uid://cy3ph8o25c237"]
 
 [ext_resource type="Script" uid="uid://b2q10fjqsmsmh" path="res://character/classes/guard/guard.gd" id="1_l3oyb"]
 [ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_8h8l6"]
 [ext_resource type="Shader" uid="uid://b43engelwcq2l" path="res://outline.gdshader" id="3_feut8"]
+[ext_resource type="Texture2D" uid="uid://b4ggbgx5goryr" path="res://art/characters/character_templates_guard_grayscale.png" id="3_qpawh"]
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_8h8l6"]
 [ext_resource type="Texture2D" uid="uid://db1ac5hodiqh8" path="res://art/characters/character_templates_guard.png" id="4_feut8"]
 [ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="6_w1bfq"]
@@ -891,6 +892,7 @@ script = ExtResource("1_l3oyb")
 order_state = NodePath("StateMachine/OrderState")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+z_index = 2
 material = SubResource("ShaderMaterial_qpawh")
 texture = SubResource("ViewportTexture_lsrw3")
 
@@ -902,43 +904,37 @@ size = Vector2i(16, 16)
 position = Vector2(8, 8)
 
 [node name="LeftArm" type="Sprite2D" parent="SubViewport/Sprites"]
-modulate = Color(1, 1, 0, 1)
-texture = ExtResource("4_feut8")
+texture = ExtResource("3_qpawh")
 hframes = 8
 vframes = 57
 frame = 56
 
 [node name="LeftLeg" type="Sprite2D" parent="SubViewport/Sprites"]
-modulate = Color(1, 1, 0, 1)
-texture = ExtResource("4_feut8")
+texture = ExtResource("3_qpawh")
 hframes = 8
 vframes = 57
 frame = 64
 
 [node name="RightLeg" type="Sprite2D" parent="SubViewport/Sprites"]
-modulate = Color(1, 1, 0, 1)
-texture = ExtResource("4_feut8")
+texture = ExtResource("3_qpawh")
 hframes = 8
 vframes = 57
 frame = 72
 
 [node name="Body" type="Sprite2D" parent="SubViewport/Sprites"]
-modulate = Color(1, 1, 0, 1)
-texture = ExtResource("4_feut8")
+texture = ExtResource("3_qpawh")
 hframes = 8
 vframes = 57
 frame = 80
 
 [node name="RightArm" type="Sprite2D" parent="SubViewport/Sprites"]
-modulate = Color(1, 1, 0, 1)
-texture = ExtResource("4_feut8")
+texture = ExtResource("3_qpawh")
 hframes = 8
 vframes = 57
 frame = 88
 
 [node name="Head" type="Sprite2D" parent="SubViewport/Sprites"]
-modulate = Color(1, 1, 0, 1)
-texture = ExtResource("4_feut8")
+texture = ExtResource("3_qpawh")
 hframes = 8
 vframes = 57
 frame = 96

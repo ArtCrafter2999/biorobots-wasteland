@@ -29,7 +29,6 @@ var qualities_pool: Array[PackedScene]:
 		qualities_pool = scene_loads;
 		return scene_loads
 
-
 func _ready() -> void:
 	generate_crew(4)
 
@@ -51,7 +50,11 @@ func get_instantiated_characters() -> Array[CrewCharacter]:
 func generate_crew(amount: int):
 	for i in range(amount):
 		var character := CharacterData.new()
-		var random = CharacterData.CharacterClass.values().pick_random()
-		character.character_class = random
+		#var ch_class = CharacterData.CharacterClass.values().pick_random()
+		if i % 4 != 0:
+			character.character_class = CharacterData.CharacterClass.GATHERER
+		else:
+			character.character_class = CharacterData.CharacterClass.GUARD
 		character.name = str(i)
+		character.generate_colors();
 		characters.append(character)

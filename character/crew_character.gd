@@ -27,21 +27,33 @@ var health_multipliers := {}
 var move_speed_multipliers := {}
 var is_selected := false
 var crew_manager: CrewManager;
+var selection_color: Color
+var default_outline = Color.BLACK
 
 func _ready() -> void:
 	#selected_notifier.hide()
-	sprite.use_parent_material = true;
+	#sprite.use_parent_material = true;
+	animation_player.character_data = character_data;
+	sprite.material = sprite.material.duplicate()
+	selection_color = \
+		(sprite.material as ShaderMaterial).get_shader_parameter("color");
+	(sprite.material as ShaderMaterial) \
+			.set_shader_parameter("color", default_outline);
+
 
 func select() -> void:
 	crew_selected.emit(self)
 	#selected_notifier.show()
-	sprite.use_parent_material = false;
+	(sprite.material as ShaderMaterial) \
+			.set_shader_parameter("color", selection_color);
 	is_selected = true;
 
 func unselect() -> void:
 	crew_unselected.emit(self)
 	#selected_notifier.hide()
-	sprite.use_parent_material = true;
+	#sprite.use_parent_material = true;
+	(sprite.material as ShaderMaterial) \
+			.set_shader_parameter("color", default_outline);
 	is_selected = false;
 
 func move(direction: Vector2, state_multiplier: float = 1) -> void:
