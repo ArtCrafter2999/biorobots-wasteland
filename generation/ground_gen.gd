@@ -16,6 +16,4 @@ func _generate_ground(area: Rect2i) -> void:
 		for y in range(area.position.y, area.position.y + area.size.y):
 			cells.append(Vector2i(x, y))
 
-	# Fill them with sand, connecting edges
 	set_cells_terrain_connect(cells, terrain_set_id, sand_id)
-	print_debug("Generated %s cells" % cells.size())
