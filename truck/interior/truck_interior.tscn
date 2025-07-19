@@ -256,3 +256,4 @@ position = Vector2(179, -21)
 zoom = Vector2(1.56, 1.56)
 
 [connection signal="Next_Region" from="CanvasLayer/TruckInteriorHud" to="SceneSwitcher" method="_switch_to_outside"]
+[connection signal="Recycle_Crew_Member" from="CanvasLayer/TruckInteriorHud" to="." method="recycle_crew_member"]

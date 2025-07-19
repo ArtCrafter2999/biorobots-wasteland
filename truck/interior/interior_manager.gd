@@ -37,6 +37,14 @@ func place_upgrade() -> void:
 	print_debug("Placed upgrade: %s at pos %s" % [selected_upgrade, build_ghost.global_position])
 
 
+func recycle_crew_member(member: CharacterData) -> void:
+	for child in get_children():
+		if child is CrewCharacter and child.character_data == member:
+			child.queue_free()
+		else:
+			print_debug("%s cannot be recycled" % member.name)
+
+
 func _ready() -> void:
 	interior_hud._initiate_upgrade_list(equipment)
 	interior_hud.connect("Upgrade_Selected", _on_upgrade_selected)
