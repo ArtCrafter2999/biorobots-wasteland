@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=41 format=3 uid="uid://bduocn7gi8akt"]
 
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
@@ -25,6 +25,8 @@
 [ext_resource type="PackedScene" uid="uid://d3owgcj1ccp7s" path="res://region/gatherable_scenes/solar_panel.tscn" id="23_fplg3"]
 [ext_resource type="PackedScene" uid="uid://tc5p3y07sa21" path="res://region/gatherable_scenes/tents.tscn" id="24_qiyki"]
 [ext_resource type="PackedScene" uid="uid://c1rhfawvxrfci" path="res://region/gatherable_scenes/well.tscn" id="25_jmq65"]
+[ext_resource type="AudioStream" uid="uid://dkeohqbwe2a4v" path="res://region/sfx/Consume music ambience test.mp3" id="26_vj84v"]
+[ext_resource type="AudioStream" uid="uid://boitqj8olbydu" path="res://region/sfx/ambience_outside.mp3" id="27_hakvv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ah2l5"]
 texture = ExtResource("2_6mhg4")
@@ -849,5 +851,17 @@ script = ExtResource("4_qd13p")
 [node name="GenerationTest" parent="." instance=ExtResource("7_6mhg4")]
 pool = Array[PackedScene]([ExtResource("10_vj84v"), ExtResource("11_hakvv"), ExtResource("12_kasag"), ExtResource("13_4ns05"), ExtResource("14_qjg56"), ExtResource("15_utv4w"), ExtResource("16_lopul"), ExtResource("17_6pddo"), ExtResource("18_jmu3e"), ExtResource("19_fbdth"), ExtResource("20_qvbbn"), ExtResource("21_y8yod"), ExtResource("22_rm88g"), ExtResource("23_fplg3"), ExtResource("24_qiyki"), ExtResource("25_jmq65")])
 value = 50.0
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("26_vj84v")
+autoplay = true
+bus = &"Music"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("27_hakvv")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="timeout" from="TimeLimit" to="SceneSwitcher" method="_switch_to_inside"]
