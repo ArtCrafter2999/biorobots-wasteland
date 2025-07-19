@@ -16,6 +16,7 @@ func _state_check_enter():
 	return false
 
 func _state_enter():
+	gatherer.animation_player.play("gather")
 	_pick_nearest_gatherable();
 	
 	gatherer.crew_manager.unselect_crew(gatherer)
