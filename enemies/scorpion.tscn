@@ -1,12 +1,17 @@
-[gd_scene load_steps=18 format=3 uid="uid://fbp6dt4ycplp"]
+[gd_scene load_steps=23 format=3 uid="uid://fbp6dt4ycplp"]
 
 [ext_resource type="Script" uid="uid://bs4xevocco57a" path="res://enemies/enemy.gd" id="1_7frlh"]
 [ext_resource type="Texture2D" uid="uid://djkbwcak2iar4" path="res://art/monsters/scorpion.png" id="2_7frlh"]
 [ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_wblph"]
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_0dihh"]
+[ext_resource type="Script" uid="uid://dpy46u0f44edl" path="res://sfx_streamer.gd" id="4_1sdgc"]
+[ext_resource type="AudioStream" uid="uid://uw46tvmsnyw1" path="res://enemies/sfx/scorpion/scorpio_walk-001.wav" id="5_4l7fx"]
 [ext_resource type="Script" uid="uid://dfawvmfy8jwhl" path="res://enemies/states/enemy_idle_state.gd" id="5_t6lld"]
+[ext_resource type="AudioStream" uid="uid://bvqvmv0vqthm6" path="res://enemies/sfx/scorpion/scorpio_get_hit.wav" id="6_3ngfn"]
 [ext_resource type="Script" path="res://enemies/states/walk_to_character_state.gd" id="6_mmdq3"]
 [ext_resource type="Script" path="res://enemies/attack_state.gd" id="7_jp7fx"]
+[ext_resource type="AudioStream" uid="uid://cagvh6lojydko" path="res://enemies/sfx/scorpion/scorpio_die.wav" id="7_tvo6b"]
+[ext_resource type="AudioStream" uid="uid://dtvngtfxpabw3" path="res://enemies/sfx/scorpion/scorpio_attack.wav" id="8_tvo6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fw1ev"]
 size = Vector2(16, 16)
@@ -141,7 +146,7 @@ radius = 100.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1sdgc"]
 radius = 6.0
 
-[node name="Scorpion" type="CharacterBody2D"]
+[node name="Scorpion" type="CharacterBody2D" node_paths=PackedStringArray("sfx_player")]
 z_index = 1
 collision_layer = 8
 collision_mask = 0
@@ -149,6 +154,18 @@ input_pickable = true
 motion_mode = 1
 script = ExtResource("1_7frlh")
 move_speed = 50.0
+sfx_player = NodePath("SFX")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+autoplay = true
+bus = &"SFX"
+script = ExtResource("4_1sdgc")
+sfx = Dictionary[String, AudioStream]({
+"attack": ExtResource("8_tvo6b"),
+"death": ExtResource("7_tvo6b"),
+"hurt": ExtResource("6_3ngfn"),
+"move": ExtResource("5_4l7fx")
+})
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fw1ev")

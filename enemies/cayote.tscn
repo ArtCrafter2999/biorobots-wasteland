@@ -1,11 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://keefnivryct0"]
+[gd_scene load_steps=23 format=3 uid="uid://keefnivryct0"]
 
 [ext_resource type="Script" uid="uid://bs4xevocco57a" path="res://enemies/enemy.gd" id="1_ee8js"]
+[ext_resource type="Script" uid="uid://dpy46u0f44edl" path="res://sfx_streamer.gd" id="2_aj47o"]
 [ext_resource type="Texture2D" uid="uid://wtv6egppgo13" path="res://art/monsters/coyote.png" id="2_ptpju"]
 [ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_aj47o"]
+[ext_resource type="AudioStream" uid="uid://uw46tvmsnyw1" path="res://enemies/sfx/scorpion/scorpio_walk-001.wav" id="3_nrjdj"]
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_m56d2"]
+[ext_resource type="AudioStream" uid="uid://dtvngtfxpabw3" path="res://enemies/sfx/scorpion/scorpio_attack.wav" id="4_w7b82"]
 [ext_resource type="Script" uid="uid://dfawvmfy8jwhl" path="res://enemies/states/enemy_idle_state.gd" id="5_ktgwd"]
+[ext_resource type="AudioStream" uid="uid://cagvh6lojydko" path="res://enemies/sfx/scorpion/scorpio_die.wav" id="5_p7d1d"]
 [ext_resource type="Script" path="res://enemies/states/walk_to_character_state.gd" id="6_nrjdj"]
+[ext_resource type="AudioStream" uid="uid://bvqvmv0vqthm6" path="res://enemies/sfx/scorpion/scorpio_get_hit.wav" id="6_tcimg"]
 [ext_resource type="Script" path="res://enemies/attack_state.gd" id="7_w7b82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fw1ev"]
@@ -141,7 +146,7 @@ radius = 100.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1sdgc"]
 radius = 6.0
 
-[node name="Cayote" type="CharacterBody2D"]
+[node name="Cayote" type="CharacterBody2D" node_paths=PackedStringArray("sfx_player")]
 z_index = 1
 collision_layer = 8
 collision_mask = 0
@@ -150,6 +155,17 @@ motion_mode = 1
 script = ExtResource("1_ee8js")
 move_speed = 70.0
 health = 50.0
+sfx_player = NodePath("SFX")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("2_aj47o")
+sfx = Dictionary[String, AudioStream]({
+"attack": ExtResource("4_w7b82"),
+"death": ExtResource("5_p7d1d"),
+"hurt": ExtResource("6_tcimg"),
+"move": ExtResource("3_nrjdj")
+})
+metadata/_custom_type_script = "uid://dpy46u0f44edl"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fw1ev")

@@ -1,11 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://cy3ph8o25c237"]
+[gd_scene load_steps=29 format=3 uid="uid://cy3ph8o25c237"]
 
 [ext_resource type="Script" uid="uid://b2q10fjqsmsmh" path="res://character/classes/guard/guard.gd" id="1_l3oyb"]
+[ext_resource type="Script" uid="uid://dpy46u0f44edl" path="res://sfx_streamer.gd" id="2_lsrw3"]
+[ext_resource type="AudioStream" uid="uid://ddwni23curwio" path="res://character/sfx/footstep_ground-001.wav" id="3_1lmwc"]
 [ext_resource type="Shader" uid="uid://b43engelwcq2l" path="res://outline.gdshader" id="3_feut8"]
 [ext_resource type="Texture2D" uid="uid://b4ggbgx5goryr" path="res://art/characters/character_templates_guard_grayscale.png" id="3_qpawh"]
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_8h8l6"]
 [ext_resource type="Texture2D" uid="uid://db1ac5hodiqh8" path="res://art/characters/character_templates_guard.png" id="4_feut8"]
-[ext_resource type="Script" uid="uid://cewionyonschi" path="res://character/crew_animation.gd" id="5_qpawh"]
+[ext_resource type="AudioStream" uid="uid://vpj7bywrxkw2" path="res://character/sfx/shotgun_shot-001.wav" id="4_xgv65"]
+[ext_resource type="Script" path="res://character/crew_animation.gd" id="5_qpawh"]
 [ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="6_w1bfq"]
 [ext_resource type="Script" uid="uid://bvvoretk0r44" path="res://character/classes/guard/states/combat_state.gd" id="7_8h8l6"]
 [ext_resource type="Script" uid="uid://bdllus2ryruw0" path="res://character/classes/guard/states/guard_order_state.gd" id="7_wot6i"]
@@ -888,13 +891,22 @@ radius = 80.0
 font = ExtResource("10_qpawh")
 font_size = 8
 
-[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("order_state") groups=["Characters"]]
+[node name="Guard" type="CharacterBody2D" node_paths=PackedStringArray("order_state", "sfx_player") groups=["Characters"]]
 collision_layer = 2
 collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_l3oyb")
 order_state = NodePath("StateMachine/OrderState")
+sfx_player = NodePath("SFX")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_lsrw3")
+sfx = Dictionary[String, AudioStream]({
+"attack": ExtResource("4_xgv65"),
+"move": ExtResource("3_1lmwc")
+})
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 2
@@ -1027,5 +1039,6 @@ horizontal_alignment = 1
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="finished" from="SFX" to="SFX" method="_on_finished"]
 [connection signal="body_entered" from="StateMachine/CombatState/AttackRange" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="StateMachine/CombatState/AttackRange" to="." method="_on_attack_area_body_exited"]
