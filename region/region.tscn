@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
 [ext_resource type="Script" uid="uid://dk2l4od2fsfj" path="res://region/scene_switcher.gd" id="1_jw7pc"]
-[ext_resource type="Script" path="res://region/scripts/time_limit.gd" id="2_4ns05"]
+[ext_resource type="Script" uid="uid://bh5a3qm6t0vh0" path="res://region/scripts/time_limit.gd" id="2_4ns05"]
 [ext_resource type="Texture2D" uid="uid://dghwl7o25wwer" path="res://art/environment/wasteland_tilemap.png" id="2_6mhg4"]
 [ext_resource type="Script" uid="uid://brqyhpdu4wvl1" path="res://region/scripts/enemy_manager.gd" id="2_ikbp5"]
 [ext_resource type="PackedScene" uid="uid://bdg1jd025yjy8" path="res://region/ui/region_tutorial.tscn" id="3_kasag"]
@@ -30,7 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://dkeohqbwe2a4v" path="res://region/sfx/Consume music ambience test.mp3" id="26_vj84v"]
 [ext_resource type="AudioStream" uid="uid://boitqj8olbydu" path="res://region/sfx/ambience_outside.mp3" id="27_hakvv"]
 [ext_resource type="AudioStream" uid="uid://0fs248he4daq" path="res://button_click.wav" id="30_utv4w"]
-[ext_resource type="Script" path="res://truck/interior/button_click.gd" id="31_lopul"]
+[ext_resource type="Script" uid="uid://bjoh6bd8ego1h" path="res://truck/interior/button_click.gd" id="31_lopul"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ah2l5"]
 texture = ExtResource("2_6mhg4")

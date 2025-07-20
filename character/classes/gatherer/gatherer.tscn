@@ -1,12 +1,12 @@
 [gd_scene load_steps=27 format=3 uid="uid://bgdgvvuud8oki"]
 
 [ext_resource type="Script" uid="uid://6snqu8ubdfl8" path="res://character/classes/gatherer/gatherer.gd" id="1_k7p76"]
-[ext_resource type="Script" path="res://sfx_streamer.gd" id="2_l22er"]
-[ext_resource type="Texture2D" uid="uid://b4ggbgx5goryr" path="res://art/characters/character_templates_guard_grayscale.png" id="3_l22er"]
+[ext_resource type="Script" uid="uid://dpy46u0f44edl" path="res://sfx_streamer.gd" id="2_l22er"]
 [ext_resource type="AudioStream" uid="uid://ddwni23curwio" path="res://character/sfx/footstep_ground-001.wav" id="3_oi131"]
 [ext_resource type="Shader" uid="uid://b43engelwcq2l" path="res://outline.gdshader" id="3_t37t2"]
-[ext_resource type="Script" uid="uid://cewionyonschi" path="res://character/crew_animation.gd" id="4_t37t2"]
+[ext_resource type="Script" path="res://character/crew_animation.gd" id="4_t37t2"]
 [ext_resource type="Script" uid="uid://b3hvfsvdcrrxe" path="res://state_machine/state_machine.gd" id="4_xvahf"]
+[ext_resource type="Texture2D" uid="uid://nh38u200k5dh" path="res://art/characters/character_templates_gatherer_final.png" id="5_5ikcf"]
 [ext_resource type="Script" uid="uid://xdmyueyjug4d" path="res://character/states/idle_state.gd" id="5_k7p76"]
 [ext_resource type="Script" uid="uid://bpdegqb5nq7ls" path="res://character/classes/gatherer/states/gatherer_order_state.gd" id="6_xvahf"]
 [ext_resource type="Script" uid="uid://b3wbkog8uakjo" path="res://character/classes/gatherer/states/gather_state.gd" id="7_k7p76"]
@@ -617,37 +617,37 @@ size = Vector2i(16, 16)
 position = Vector2(8, 8)
 
 [node name="LeftArm" type="Sprite2D" parent="SubViewport/Sprites"]
-texture = ExtResource("3_l22er")
+texture = ExtResource("5_5ikcf")
 hframes = 8
 vframes = 57
 frame = 56
 
 [node name="LeftLeg" type="Sprite2D" parent="SubViewport/Sprites"]
-texture = ExtResource("3_l22er")
+texture = ExtResource("5_5ikcf")
 hframes = 8
 vframes = 57
 frame = 64
 
 [node name="RightLeg" type="Sprite2D" parent="SubViewport/Sprites"]
-texture = ExtResource("3_l22er")
+texture = ExtResource("5_5ikcf")
 hframes = 8
 vframes = 57
 frame = 72
 
 [node name="Body" type="Sprite2D" parent="SubViewport/Sprites"]
-texture = ExtResource("3_l22er")
+texture = ExtResource("5_5ikcf")
 hframes = 8
 vframes = 57
 frame = 80
 
 [node name="RightArm" type="Sprite2D" parent="SubViewport/Sprites"]
-texture = ExtResource("3_l22er")
+texture = ExtResource("5_5ikcf")
 hframes = 8
 vframes = 57
 frame = 88
 
 [node name="Head" type="Sprite2D" parent="SubViewport/Sprites"]
-texture = ExtResource("3_l22er")
+texture = ExtResource("5_5ikcf")
 hframes = 8
 vframes = 57
 frame = 96
