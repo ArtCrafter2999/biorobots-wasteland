@@ -26,7 +26,7 @@ func _state_enter():
 
 func _state_process(delta: float):
 	gatherer.animation_player.play("gather")
-	if not gatherable_target:
+	if not is_instance_valid(gatherable_target):
 		_pick_nearest_gatherable();
 		if not gatherable_target:
 			machine.change_state(no_gatherable_state);
@@ -35,10 +35,8 @@ func _state_process(delta: float):
 		gatherer.move(global_position.direction_to(gatherable_target.global_position))
 		return;
 	
-	if not is_instance_valid(gatherable_target):
-		machine.change_state(go_home_state)
-		return
 	gatherer.biomass += gatherable_target.gather(min(CrewGatherer.GATHERING_SPEED * delta, max_storage - gatherer.biomass))
+	
 	if is_equal_approx(gatherable_target.value, 0):
 		gatherable_target.destroy();
 

@@ -6,6 +6,7 @@ extends StateBase
 var truck: Node2D
 
 func _state_check_enter():
+	print("lsjfldsf ", is_equal_approx(gatherer.biomass, gatherer.max_biomass), " ", gatherer.biomass, " ", gatherer.max_biomass)
 	if is_equal_approx(gatherer.biomass, gatherer.max_biomass):
 		gatherer.biomass = gatherer.max_biomass;
 		return true;
