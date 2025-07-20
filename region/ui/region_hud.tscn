@@ -18,7 +18,7 @@ time_counter = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxCont
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 266.0
-offset_bottom = 82.0
+offset_bottom = 70.0
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -56,3 +56,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Junk - "
 fit_content = true
+
+[node name="FinishDayButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Finish the day"
+
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/FinishDayButton" to="." method="_on_finish_day_button_pressed"]

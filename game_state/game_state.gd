@@ -38,13 +38,15 @@ func _ready() -> void:
 func get_instantiated_characters() -> Array[CrewCharacter]:
 	var instantiated_characters: Array[CrewCharacter] = []
 
-	for crew_member in characters.filter(func (ch): return ch):
+	for crew_member_index in range(characters.size()):
+		var crew_member = characters[crew_member_index]
 		var crew_member_scene: PackedScene = crew_scenes[crew_member.character_class]
 		if crew_member_scene == null:
 			print_debug("No scene found for %s" % crew_member.character_class)
 			continue
 		var crew_member_instance: CrewCharacter = crew_member_scene.instantiate()
 		
+		#crew_member_instance.character_id = crew_member_index
 		crew_member_instance.character_data = crew_member
 		instantiated_characters.append(crew_member_instance)
 

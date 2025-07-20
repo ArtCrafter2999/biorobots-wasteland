@@ -1,6 +1,7 @@
 extends Control
 
 @export var region_timer: Timer
+@export var scene_swither: SceneSwitcher
 @export var biomass_counter: RichTextLabel
 @export var junk_counter: RichTextLabel
 @export var time_counter: RichTextLabel
@@ -8,9 +9,6 @@ extends Control
 
 func _ready() -> void:
 	PlayerInventory.connect(&"Inventory_Updated", _update_counters)
-
-	if GameState.first_outside_load:
-		hide()
 
 
 func _process(_delta: float) -> void:
@@ -24,5 +22,5 @@ func _update_counters() -> void:
 	junk_counter.text = "Junk - %d" % PlayerInventory.get_item_amount("junk")
 
 
-func _on_region_tutorial_tutorial_completed() -> void:
-	show()
+func _on_finish_day_button_pressed() -> void:
+	scene_swither._switch_to_inside();

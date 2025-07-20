@@ -28,7 +28,16 @@ var crew_manager: CrewManager;
 var selection_color: Color
 var default_outline = Color.BLACK
 
+func _process(delta: float) -> void:
+	pass;
+	#if character_id == 1:
+		#print("CrewManager: ", crew_manager);
+
 func _ready() -> void:
+	#print("CrewManager ready")
+	input_event.connect(_on_input_event)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 	#selected_notifier.hide()
 	#sprite.use_parent_material = true;
 	animation.character_data = character_data;
@@ -68,8 +77,9 @@ func _get_multiplier(dictionary: Dictionary):
 
 
 func _on_mouse_entered() -> void:
+	if character_id == 1:
+		print("CrewManager entered: ", crew_manager);
 	crew_selection_possible.emit(true)
-
 
 func _on_mouse_exited() -> void:
 	crew_selection_possible.emit(false)
