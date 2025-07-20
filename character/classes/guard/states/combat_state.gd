@@ -20,6 +20,19 @@ func _state_enter():
 	if name == &"draw":
 		character.animation_player.play(&"shoot")
 
+func _state_process(delta: float) -> void:
+	var enemies = attack_range.get_overlapping_bodies() \
+			.filter((func (character: Character): 
+					return not character.is_dead));
+	
+	if enemies.is_empty():
+		return;
+		
+	character.proximity_sort(enemies)
+	var target = enemies[0]
+	character.animation_player.flip_h = \
+			global_position.direction_to(target.global_position).x < 0
+
 func shoot():
 	var enemies = attack_range.get_overlapping_bodies() \
 			.filter((func (character: Character): 

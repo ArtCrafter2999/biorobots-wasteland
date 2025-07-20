@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
-    Button_Clicked.emit()
+	Button_Clicked.emit()
 	GameState.first_inside_load = false
 	Tutorial_Completed.emit()
 	queue_free()

@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dv6nl67xq5j8f" path="res://truck/interior/sfx/ambience_inside.mp3" id="10_um8ih"]
 [ext_resource type="AudioStream" uid="uid://droiecg5420fy" path="res://truck/interior/sfx/generator.wav" id="11_p5j3c"]
 [ext_resource type="AudioStream" uid="uid://0fs248he4daq" path="res://button_click.wav" id="12_p5j3c"]
-[ext_resource type="Script" uid="uid://bjoh6bd8ego1h" path="res://truck/interior/button_click.gd" id="13_8afd0"]
+[ext_resource type="Script" path="res://truck/interior/button_click.gd" id="13_8afd0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61oqr"]
 texture = ExtResource("3_uf6vq")

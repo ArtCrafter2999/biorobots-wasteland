@@ -84,7 +84,7 @@ func _on_recycle_crew_pressed() -> void:
 	PlayerInventory.add_item("biomass", 5)
 	Recycle_Crew_Member.emit(member)
 	_update_crew_list()
-	not_enough_energy_panel.hide();
+	not_enough_biomass_panel.hide();
 
 func show_not_enough():
 	not_enough_biomass_panel.show();
