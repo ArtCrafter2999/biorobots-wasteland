@@ -209,8 +209,9 @@ interior_hud = NodePath("CanvasLayer/TruckInteriorHud")
 floor_tilemap = NodePath("ValidTiles")
 equipment_parent = NodePath("Upgrades")
 
-[node name="SceneSwitcher" type="Node2D" parent="."]
+[node name="SceneSwitcher" type="Node2D" parent="." node_paths=PackedStringArray("truck_interior_hud")]
 script = ExtResource("2_uf6vq")
+truck_interior_hud = NodePath("../CanvasLayer/TruckInteriorHud")
 metadata/_custom_type_script = "uid://dk2l4od2fsfj"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

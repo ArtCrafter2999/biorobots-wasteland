@@ -1,6 +1,8 @@
 extends Node2D
 class_name SceneSwitcher
 
+@export var truck_interior_hud: TruckInteriorHud;
+
 var inside_scene: String = "res://truck/interior/truck_interior.tscn" 
 var outside_scene: String = "res://region/region.tscn"
 
@@ -11,6 +13,7 @@ func _switch_to_inside() -> void:
 
 func _switch_to_outside() -> void:
 	if PlayerInventory.get_item_amount("energy") < 5:
+		truck_interior_hud.show_not_enough();
 		print_debug("Not enough energy to switch to outside!")
 		return
 	PlayerInventory.remove_item("energy", 5)
