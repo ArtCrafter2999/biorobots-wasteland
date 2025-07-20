@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://cliwlj4p8fni0"]
+[gd_scene load_steps=11 format=4 uid="uid://cliwlj4p8fni0"]
 
 [ext_resource type="Script" uid="uid://4oy2e4p583nt" path="res://truck/interior/interior_manager.gd" id="1_elx4q"]
 [ext_resource type="Script" uid="uid://dk2l4od2fsfj" path="res://region/scene_switcher.gd" id="2_uf6vq"]
 [ext_resource type="Texture2D" uid="uid://dbn23l2x26fbl" path="res://art/base/base_interface_floor.png" id="3_mmuij"]
 [ext_resource type="Texture2D" uid="uid://dghwl7o25wwer" path="res://art/environment/wasteland_tilemap.png" id="3_uf6vq"]
+[ext_resource type="PackedScene" uid="uid://mhkv1cbroiqj" path="res://truck/interior/ui/interior_tutorial.tscn" id="4_61oqr"]
 [ext_resource type="PackedScene" uid="uid://b6w5sp41x3yol" path="res://truck/interior/upgrades/bed.tscn" id="4_73hqn"]
 [ext_resource type="PackedScene" uid="uid://dsgb1cboxfm4" path="res://truck/interior/upgrades/generator.tscn" id="4_uf6vq"]
 [ext_resource type="PackedScene" uid="uid://bs4xxmb4byj2g" path="res://truck/interior/ui/truck_interior_hud.tscn" id="6_mmuij"]
@@ -217,6 +218,8 @@ metadata/_custom_type_script = "uid://dk2l4od2fsfj"
 [node name="TruckInteriorHud" parent="CanvasLayer" instance=ExtResource("6_mmuij")]
 visible = false
 
+[node name="InteriorTutorial" parent="CanvasLayer" instance=ExtResource("4_61oqr")]
+
 [node name="BG" type="ColorRect" parent="."]
 offset_left = -946.0
 offset_top = -543.0
@@ -257,3 +260,4 @@ zoom = Vector2(1.56, 1.56)
 
 [connection signal="Next_Region" from="CanvasLayer/TruckInteriorHud" to="SceneSwitcher" method="_switch_to_outside"]
 [connection signal="Recycle_Crew_Member" from="CanvasLayer/TruckInteriorHud" to="." method="recycle_crew_member"]
+[connection signal="Tutorial_Completed" from="CanvasLayer/InteriorTutorial" to="CanvasLayer/TruckInteriorHud" method="_on_interior_tutorial_tutorial_completed"]

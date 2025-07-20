@@ -8,7 +8,9 @@ extends Control
 
 func _ready() -> void:
 	PlayerInventory.connect(&"Inventory_Updated", _update_counters)
-	show()
+
+	if GameState.first_outside_load:
+		hide()
 
 
 func _process(_delta: float) -> void:
@@ -20,3 +22,7 @@ func _update_counters() -> void:
 	time_counter.text = "Sundown in %ss" % time_left
 	biomass_counter.text = "Biomass - %d" % PlayerInventory.get_item_amount("biomass")
 	junk_counter.text = "Junk - %d" % PlayerInventory.get_item_amount("junk")
+
+
+func _on_region_tutorial_tutorial_completed() -> void:
+	show()

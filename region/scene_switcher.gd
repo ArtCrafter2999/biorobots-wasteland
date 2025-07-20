@@ -10,4 +10,8 @@ func _switch_to_inside() -> void:
 
 
 func _switch_to_outside() -> void:
+	if PlayerInventory.get_item_amount("energy") < 5:
+		print_debug("Not enough energy to switch to outside!")
+		return
+	PlayerInventory.remove_item("energy", 5)
 	get_tree().change_scene_to_file(outside_scene)

@@ -5,6 +5,11 @@ signal Inventory_Updated
 
 @export var inventory: Dictionary[StringName, float] = {}
 
+
+func _ready() -> void:
+	add_item("energy", 7)
+
+
 func add_item(item: StringName, amount: float = 1.0) -> void:
 	if item in inventory:
 		inventory[item] += amount
