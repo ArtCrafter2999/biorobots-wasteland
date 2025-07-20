@@ -43,6 +43,8 @@ func move(direction: Vector2, state_multiplier: float = 1):
 	super.move(direction, state_multiplier * _get_multiplier(move_speed_multipliers))
 
 func select() -> void:
+	if is_dead:
+		return;
 	crew_selected.emit(self)
 	#selected_notifier.show()
 	(sprite.material as ShaderMaterial) \

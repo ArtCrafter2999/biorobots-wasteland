@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
-[ext_resource type="Script" uid="uid://dk2l4od2fsfj" path="res://region/scene_switcher.gd" id="1_jw7pc"]
+[ext_resource type="Script" path="res://region/scene_switcher.gd" id="1_jw7pc"]
 [ext_resource type="Texture2D" uid="uid://dghwl7o25wwer" path="res://art/environment/wasteland_tilemap.png" id="2_6mhg4"]
 [ext_resource type="Script" uid="uid://brqyhpdu4wvl1" path="res://region/scripts/enemy_manager.gd" id="2_ikbp5"]
 [ext_resource type="Texture2D" uid="uid://bbg0m8v81ghqt" path="res://art/base/base_spritesheet.png" id="3_qd13p"]
@@ -857,13 +857,11 @@ value = 50.0
 [node name="Music" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("26_vj84v")
 autoplay = true
-bus = &"Music"
 parameters/looping = true
 
 [node name="Ambience" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("27_hakvv")
 autoplay = true
-bus = &"SFX"
 parameters/looping = true
 
 [connection signal="timeout" from="TimeLimit" to="SceneSwitcher" method="_switch_to_inside"]

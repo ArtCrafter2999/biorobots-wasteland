@@ -10,7 +10,9 @@ extends StateBase
 var bullet_scene: PackedScene = preload("res://character/classes/guard/bullet.tscn")
 
 func _state_check_enter():
-	return attack_range.has_overlapping_bodies();
+	return attack_range.get_overlapping_bodies()\
+			.any((func (character: Character): 
+					return not character.is_dead));
 
 func _state_enter():
 	character.animation_player.play(&"draw")
@@ -19,7 +21,9 @@ func _state_enter():
 		character.animation_player.play(&"shoot")
 
 func shoot():
-	var enemies = attack_range.get_overlapping_bodies()
+	var enemies = attack_range.get_overlapping_bodies() \
+			.filter((func (character: Character): 
+					return not character.is_dead));
 	
 	if enemies.is_empty():
 		machine.change_state(order_state);

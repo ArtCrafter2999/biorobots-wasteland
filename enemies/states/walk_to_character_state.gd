@@ -18,9 +18,13 @@ func _state_enter():
 	_target_nearest()
 
 func _target_nearest():
-	if not character_check.has_overlapping_bodies(): return;
+	var bodies = character_check.get_overlapping_bodies() \
+			.filter((func (character: Character): 
+					return not character.is_dead));
 	
-	var bodies = character_check.get_overlapping_bodies();
+	if bodies.size() == 0:
+		return;
+	
 	character.proximity_sort(bodies)
 	target_character = bodies[0]
 
@@ -28,7 +32,9 @@ func _state_physics_process(_delta: float):
 	if not target_character or \
 			not is_instance_valid(target_character) \
 			or target_character.is_dead:
-		if character_check.has_overlapping_bodies():
+		if character_check.get_overlapping_bodies() \
+			.any((func (character: Character): 
+					return not character.is_dead)):
 			_target_nearest();
 		else:
 			machine.change_state(see_noone_state);

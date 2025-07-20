@@ -1,6 +1,8 @@
 class_name Character
 extends CharacterBody2D
 
+signal on_death;
+
 @export var move_speed: float = 100.0
 @export var health: float = 100.0
 @export var sfx_player: AudioStreamPlayer2D
@@ -8,15 +10,13 @@ extends CharacterBody2D
 @onready var animation_player: CharacterAnimation = %Animation
 
 var is_dead: bool: 
-	get: return health < 0;
+	get: return health <= 0;
 
 func take_damage(damage: float) -> void:
 	health -= damage
 	play_sfx("hurt")
 	if health <= 0:
-		play_sfx("death")
-		await sfx_player.finished
-		queue_free()
+		on_death.emit();
 
 func move(direction: Vector2, multiplier: float = 1) -> void:
 	velocity = direction * move_speed * multiplier

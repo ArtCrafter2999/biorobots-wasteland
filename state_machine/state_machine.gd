@@ -25,6 +25,7 @@ func _process(delta: float) -> void:
 	if !state: return
 	var other_state = state._state_check_other_enter()
 	if other_state: 
+		print("other_state ", other_state);
 		change_state(other_state)
 	state._state_process(delta);
 	
@@ -35,6 +36,7 @@ func _physics_process(delta: float) -> void:
 ## calls exit in prvious state and enters the provided new state
 ## you can provide additional context to the next state
 func change_state(new_state: StateBase):
+	print("new_state ", new_state);
 	if not new_state:
 		new_state = fallback_state;
 		return;

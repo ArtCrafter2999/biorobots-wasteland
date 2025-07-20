@@ -35,7 +35,7 @@ func _ready() -> void:
 func get_instantiated_characters() -> Array[CrewCharacter]:
 	var instantiated_characters: Array[CrewCharacter] = []
 
-	for crew_member in characters:
+	for crew_member in characters.filter(func (ch): return ch):
 		var crew_member_scene: PackedScene = crew_scenes[crew_member.character_class]
 		if crew_member_scene == null:
 			print_debug("No scene found for %s" % crew_member.character_class)
