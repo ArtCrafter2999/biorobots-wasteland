@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cliwlj4p8fni0"]
+[gd_scene load_steps=16 format=4 uid="uid://cliwlj4p8fni0"]
 
 [ext_resource type="Script" uid="uid://4oy2e4p583nt" path="res://truck/interior/interior_manager.gd" id="1_elx4q"]
 [ext_resource type="Script" uid="uid://dk2l4od2fsfj" path="res://region/scene_switcher.gd" id="2_uf6vq"]
@@ -11,6 +11,8 @@
 [ext_resource type="AudioStream" uid="uid://ceu15otiicaxh" path="res://truck/interior/sfx/music_inside.mp3" id="9_2cj8y"]
 [ext_resource type="AudioStream" uid="uid://dv6nl67xq5j8f" path="res://truck/interior/sfx/ambience_inside.mp3" id="10_um8ih"]
 [ext_resource type="AudioStream" uid="uid://droiecg5420fy" path="res://truck/interior/sfx/generator.wav" id="11_p5j3c"]
+[ext_resource type="AudioStream" uid="uid://0fs248he4daq" path="res://button_click.wav" id="12_p5j3c"]
+[ext_resource type="Script" uid="uid://bjoh6bd8ego1h" path="res://truck/interior/button_click.gd" id="13_8afd0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61oqr"]
 texture = ExtResource("3_uf6vq")
@@ -277,6 +279,12 @@ parameters/looping = true
 stream = ExtResource("11_p5j3c")
 autoplay = true
 
+[node name="ButtonClick" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("12_p5j3c")
+script = ExtResource("13_8afd0")
+
+[connection signal="Button_Clicked" from="CanvasLayer/TruckInteriorHud" to="SFX/ButtonClick" method="play_click"]
 [connection signal="Next_Region" from="CanvasLayer/TruckInteriorHud" to="SceneSwitcher" method="_switch_to_outside"]
 [connection signal="Recycle_Crew_Member" from="CanvasLayer/TruckInteriorHud" to="." method="recycle_crew_member"]
+[connection signal="Button_Clicked" from="CanvasLayer/InteriorTutorial" to="SFX/ButtonClick" method="play_click"]
 [connection signal="Tutorial_Completed" from="CanvasLayer/InteriorTutorial" to="CanvasLayer/TruckInteriorHud" method="_on_interior_tutorial_tutorial_completed"]

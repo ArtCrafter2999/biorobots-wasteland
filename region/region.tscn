@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=45 format=3 uid="uid://bduocn7gi8akt"]
 
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
@@ -29,6 +29,8 @@
 [ext_resource type="PackedScene" uid="uid://c1rhfawvxrfci" path="res://region/gatherable_scenes/well.tscn" id="25_jmq65"]
 [ext_resource type="AudioStream" uid="uid://dkeohqbwe2a4v" path="res://region/sfx/Consume music ambience test.mp3" id="26_vj84v"]
 [ext_resource type="AudioStream" uid="uid://boitqj8olbydu" path="res://region/sfx/ambience_outside.mp3" id="27_hakvv"]
+[ext_resource type="AudioStream" uid="uid://0fs248he4daq" path="res://button_click.wav" id="30_utv4w"]
+[ext_resource type="Script" uid="uid://bjoh6bd8ego1h" path="res://truck/interior/button_click.gd" id="31_lopul"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ah2l5"]
 texture = ExtResource("2_6mhg4")
@@ -868,6 +870,12 @@ stream = ExtResource("27_hakvv")
 autoplay = true
 parameters/looping = true
 
+[node name="ButtonClick" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("30_utv4w")
+script = ExtResource("31_lopul")
+
 [connection signal="timeout" from="TimeLimit" to="SceneSwitcher" method="_switch_to_inside"]
+[connection signal="Button_Clicked" from="CanvasLayer/RegionHud" to="SFX/ButtonClick" method="play_click"]
+[connection signal="Button_Clicked" from="CanvasLayer/RegionTutorial" to="SFX/ButtonClick" method="play_click"]
 [connection signal="Tutorial_Completed" from="CanvasLayer/RegionTutorial" to="TimeLimit" method="_on_region_tutorial_tutorial_completed"]
 [connection signal="Tutorial_Completed" from="CanvasLayer/RegionTutorial" to="CanvasLayer/RegionHud" method="_on_region_tutorial_tutorial_completed"]
