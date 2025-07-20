@@ -84,10 +84,10 @@ func _spawn_characters() -> void:
 		add_child(character)
 
 
-func _create_build_ghost(texture: AtlasTexture, size: Vector2) -> void:
+func _create_build_ghost(texture: AtlasTexture) -> void:
 	var new_ghost: BuildGhost = build_ghost_scene.instantiate()
 	new_ghost.sprite.texture = texture
-	new_ghost.collider.shape.size = size * 16
+	new_ghost.collider.shape.size = Vector2(16, 16)
 	add_child(new_ghost)
 	build_ghost = new_ghost
 
@@ -95,7 +95,7 @@ func _create_build_ghost(texture: AtlasTexture, size: Vector2) -> void:
 func _on_upgrade_selected(index: int) -> void:
 	build_mode = true
 	selected_upgrade = equipment[equipment.keys()[index]]
-	_create_build_ghost(selected_upgrade.icon, selected_upgrade.size)
+	_create_build_ghost(selected_upgrade.icon)
 
 
 func _on_upgrade_deselected() -> void:

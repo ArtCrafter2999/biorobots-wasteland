@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=3 uid="uid://keefnivryct0"]
 
 [ext_resource type="Script" uid="uid://bs4xevocco57a" path="res://enemies/enemy.gd" id="1_ee8js"]
-[ext_resource type="Script" path="res://sfx_streamer.gd" id="2_aj47o"]
+[ext_resource type="Script" uid="uid://dpy46u0f44edl" path="res://sfx_streamer.gd" id="2_aj47o"]
 [ext_resource type="Texture2D" uid="uid://wtv6egppgo13" path="res://art/monsters/coyote.png" id="2_ptpju"]
 [ext_resource type="Script" uid="uid://bvxrkcl38odsq" path="res://character/character_animation.gd" id="3_aj47o"]
 [ext_resource type="AudioStream" uid="uid://uw46tvmsnyw1" path="res://enemies/sfx/scorpion/scorpio_walk-001.wav" id="3_nrjdj"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://tvkm31r53crp" path="res://enemies/states/walk_to_character_state.gd" id="6_nrjdj"]
 [ext_resource type="AudioStream" uid="uid://bvqvmv0vqthm6" path="res://enemies/sfx/scorpion/scorpio_get_hit.wav" id="6_tcimg"]
 [ext_resource type="Script" uid="uid://gx2cvisvyews" path="res://enemies/attack_state.gd" id="7_w7b82"]
-[ext_resource type="Script" uid="uid://b4hs5iv4x1nvi" path="res://character/states/death_state.gd" id="13_w7b82"]
+[ext_resource type="Script" path="res://character/states/death_state.gd" id="13_w7b82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fw1ev"]
 size = Vector2(16, 16)

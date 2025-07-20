@@ -1,13 +1,16 @@
-[gd_scene load_steps=11 format=4 uid="uid://cliwlj4p8fni0"]
+[gd_scene load_steps=14 format=4 uid="uid://cliwlj4p8fni0"]
 
 [ext_resource type="Script" uid="uid://4oy2e4p583nt" path="res://truck/interior/interior_manager.gd" id="1_elx4q"]
 [ext_resource type="Script" uid="uid://dk2l4od2fsfj" path="res://region/scene_switcher.gd" id="2_uf6vq"]
 [ext_resource type="Texture2D" uid="uid://dbn23l2x26fbl" path="res://art/base/base_interface_floor.png" id="3_mmuij"]
 [ext_resource type="Texture2D" uid="uid://dghwl7o25wwer" path="res://art/environment/wasteland_tilemap.png" id="3_uf6vq"]
-[ext_resource type="PackedScene" path="res://truck/interior/ui/interior_tutorial.tscn" id="4_61oqr"]
+[ext_resource type="PackedScene" uid="uid://mhkv1cbroiqj" path="res://truck/interior/ui/interior_tutorial.tscn" id="4_61oqr"]
 [ext_resource type="PackedScene" uid="uid://b6w5sp41x3yol" path="res://truck/interior/upgrades/bed.tscn" id="4_73hqn"]
 [ext_resource type="PackedScene" uid="uid://dsgb1cboxfm4" path="res://truck/interior/upgrades/generator.tscn" id="4_uf6vq"]
 [ext_resource type="PackedScene" uid="uid://bs4xxmb4byj2g" path="res://truck/interior/ui/truck_interior_hud.tscn" id="6_mmuij"]
+[ext_resource type="AudioStream" uid="uid://ceu15otiicaxh" path="res://truck/interior/sfx/music_inside.mp3" id="9_2cj8y"]
+[ext_resource type="AudioStream" uid="uid://dv6nl67xq5j8f" path="res://truck/interior/sfx/ambience_inside.mp3" id="10_um8ih"]
+[ext_resource type="AudioStream" uid="uid://droiecg5420fy" path="res://truck/interior/sfx/generator.wav" id="11_p5j3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61oqr"]
 texture = ExtResource("3_uf6vq")
@@ -256,6 +259,22 @@ position = Vector2(179, -21)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.56, 1.56)
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("9_2cj8y")
+autoplay = true
+parameters/looping = true
+
+[node name="Ambience" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("10_um8ih")
+autoplay = true
+parameters/looping = true
+
+[node name="Generator" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("11_p5j3c")
+autoplay = true
 
 [connection signal="Next_Region" from="CanvasLayer/TruckInteriorHud" to="SceneSwitcher" method="_switch_to_outside"]
 [connection signal="Recycle_Crew_Member" from="CanvasLayer/TruckInteriorHud" to="." method="recycle_crew_member"]
