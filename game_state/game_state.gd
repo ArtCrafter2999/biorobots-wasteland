@@ -5,6 +5,9 @@ var crew_scenes: Dictionary[CharacterData.CharacterClass, PackedScene] = {
 	CharacterData.CharacterClass.GATHERER: preload("res://character/classes/gatherer/gatherer.tscn"),
 }
 
+var first_outside_load: bool = true
+var first_inside_load: bool = true
+
 var characters: Array[CharacterData] = []
 var qualities_pool: Array[PackedScene]:
 	get:

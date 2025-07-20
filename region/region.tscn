@@ -1,10 +1,12 @@
-[gd_scene load_steps=41 format=3 uid="uid://bduocn7gi8akt"]
+[gd_scene load_steps=43 format=3 uid="uid://bduocn7gi8akt"]
 
 [ext_resource type="PackedScene" uid="uid://rwf5n6dq2q0u" path="res://region/ui/region_hud.tscn" id="1_er52e"]
 [ext_resource type="Script" uid="uid://be77jqjjxgmjg" path="res://region/scripts/crew_manager.gd" id="1_jcaam"]
 [ext_resource type="Script" uid="uid://dk2l4od2fsfj" path="res://region/scene_switcher.gd" id="1_jw7pc"]
+[ext_resource type="Script" uid="uid://bh5a3qm6t0vh0" path="res://region/scripts/time_limit.gd" id="2_4ns05"]
 [ext_resource type="Texture2D" uid="uid://dghwl7o25wwer" path="res://art/environment/wasteland_tilemap.png" id="2_6mhg4"]
 [ext_resource type="Script" uid="uid://brqyhpdu4wvl1" path="res://region/scripts/enemy_manager.gd" id="2_ikbp5"]
+[ext_resource type="PackedScene" uid="uid://bmnhoio7ovlrl" path="res://region/ui/region_tutorial.tscn" id="3_kasag"]
 [ext_resource type="Texture2D" uid="uid://bbg0m8v81ghqt" path="res://art/base/base_spritesheet.png" id="3_qd13p"]
 [ext_resource type="Script" uid="uid://dc6o1j0d0wenv" path="res://generation/ground_gen.gd" id="3_vj84v"]
 [ext_resource type="Script" uid="uid://dlinu8oxqo1vl" path="res://player/player.gd" id="4_qd13p"]
@@ -808,13 +810,15 @@ script = ExtResource("1_jw7pc")
 [node name="TimeLimit" type="Timer" parent="."]
 wait_time = 180.0
 one_shot = true
-autostart = true
+script = ExtResource("2_4ns05")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RegionHud" parent="CanvasLayer" node_paths=PackedStringArray("region_timer") instance=ExtResource("1_er52e")]
 visible = false
 region_timer = NodePath("../../TimeLimit")
+
+[node name="RegionTutorial" parent="CanvasLayer" instance=ExtResource("3_kasag")]
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
@@ -867,3 +871,5 @@ bus = &"SFX"
 parameters/looping = true
 
 [connection signal="timeout" from="TimeLimit" to="SceneSwitcher" method="_switch_to_inside"]
+[connection signal="Tutorial_Completed" from="CanvasLayer/RegionTutorial" to="TimeLimit" method="_on_region_tutorial_tutorial_completed"]
+[connection signal="Tutorial_Completed" from="CanvasLayer/RegionTutorial" to="CanvasLayer/RegionHud" method="_on_region_tutorial_tutorial_completed"]

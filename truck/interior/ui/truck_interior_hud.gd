@@ -17,7 +17,9 @@ func _ready() -> void:
 	_update_counters()
 	_update_crew_list()
 	confirm_panel.hide()
-	show()
+
+	if GameState.first_inside_load:
+		hide()
 
 
 func _input(event: InputEvent) -> void:
@@ -37,7 +39,7 @@ func _update_counters() -> void:
 func _update_crew_list() -> void:
 	crew_list.clear()
 	for crew_member in GameState.characters:
-		crew_list.add_item(crew_member.name)
+		crew_list.add_item("%s (%s)" % [crew_member.name, crew_member.character_class])
 		print_debug("Added %s to crew list" % crew_member.name)
 
 
@@ -78,3 +80,7 @@ func _on_recycle_crew_pressed() -> void:
 	PlayerInventory.add_item("energy", 5)
 	Recycle_Crew_Member.emit(member)
 	_update_crew_list()
+
+
+func _on_interior_tutorial_tutorial_completed() -> void:
+	show()
