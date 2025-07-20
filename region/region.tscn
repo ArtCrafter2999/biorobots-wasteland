@@ -858,10 +858,12 @@ value = 50.0
 stream = ExtResource("26_vj84v")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
 
 [node name="Ambience" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("27_hakvv")
 autoplay = true
 bus = &"SFX"
+parameters/looping = true
 
 [connection signal="timeout" from="TimeLimit" to="SceneSwitcher" method="_switch_to_inside"]
