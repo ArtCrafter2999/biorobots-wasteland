@@ -12,7 +12,8 @@ signal Recycle_Crew_Member(member: CharacterData)
 @export var confirm_panel: Control
 @export var crew_list: ItemList
 
-@onready var not_enough_energy_panel: PanelContainer = $MarginContainer/HBoxContainer/NotEnoughEnergyPanel
+@onready var not_enough_biomass_panel: PanelContainer = $MarginContainer/HBoxContainer/NotEnoughBiomassPanel
+@onready var cost: RichTextLabel = $MarginContainer/HBoxContainer/VBoxContainer/ConfirmationPanel/MarginContainer/VBoxContainer/Cost
 
 
 func _ready() -> void:
@@ -31,9 +32,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _update_counters() -> void:
-	var energy: int = int(PlayerInventory.get_item_amount("energy"))
-	var junk: int = int(PlayerInventory.get_item_amount("junk"))
-	resource_counter.text = "Energy - %s\nJunk - %s" % [energy, junk]
+	var biomass: int = int(PlayerInventory.get_item_amount("biomass"))
+	resource_counter.text = "Biomass - %s" % biomass
 
 
 func _update_crew_list() -> void:
@@ -57,6 +57,7 @@ func _on_upgrade_selected(index: int) -> void:
 
 
 func _on_next_region_pressed() -> void:
+	cost.text = "Travel Cost - %s biomass" % str(5 + GameState.characters.size())
 	confirm_panel.show()
 
 
@@ -77,10 +78,11 @@ func _on_recycle_crew_pressed() -> void:
 	
 	var member: CharacterData = GameState.characters[crew_list.get_selected_items()[0]]
 	GameState.characters.erase(member)
-	PlayerInventory.add_item("energy", 5)
+	PlayerInventory.add_item("biomass", 5)
 	Recycle_Crew_Member.emit(member)
 	_update_crew_list()
-	not_enough_energy_panel.hide();
+	not_enough_biomass_panel.hide();
+	cost.text = "Travel Cost - %s biomass" % str(5 + GameState.characters.size())
 
 func show_not_enough():
-	not_enough_energy_panel.show();
+	not_enough_biomass_panel.show();

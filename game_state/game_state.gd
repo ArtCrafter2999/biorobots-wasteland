@@ -5,6 +5,8 @@ var crew_scenes: Dictionary[CharacterData.CharacterClass, PackedScene] = {
 	CharacterData.CharacterClass.GATHERER: preload("res://character/classes/gatherer/gatherer.tscn"),
 }
 
+var day_count = 0
+
 var first_outside_load: bool = true
 var first_inside_load: bool = true
 
@@ -52,8 +54,9 @@ func get_instantiated_characters() -> Array[CrewCharacter]:
 
 	return instantiated_characters
 
+var names = load_names();
+
 func generate_crew(amount: int):
-	var names = load_names();
 	for i in range(amount):
 		var character := CharacterData.new()
 		#var ch_class = CharacterData.CharacterClass.values().pick_random()

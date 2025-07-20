@@ -7,7 +7,7 @@ signal Inventory_Updated
 
 
 func _ready() -> void:
-	add_item("energy", 7)
+	add_item("biomass", 7)
 
 
 func add_item(item: StringName, amount: float = 1.0) -> void:

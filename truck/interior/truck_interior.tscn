@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dk2l4od2fsfj" path="res://region/scene_switcher.gd" id="2_uf6vq"]
 [ext_resource type="Texture2D" uid="uid://dbn23l2x26fbl" path="res://art/base/base_interface_floor.png" id="3_mmuij"]
 [ext_resource type="Texture2D" uid="uid://dghwl7o25wwer" path="res://art/environment/wasteland_tilemap.png" id="3_uf6vq"]
-[ext_resource type="PackedScene" uid="uid://mhkv1cbroiqj" path="res://truck/interior/ui/interior_tutorial.tscn" id="4_61oqr"]
+[ext_resource type="PackedScene" uid="uid://cwnyhs8p1y1ag" path="res://truck/interior/ui/interior_tutorial.tscn" id="4_61oqr"]
 [ext_resource type="PackedScene" uid="uid://b6w5sp41x3yol" path="res://truck/interior/upgrades/bed.tscn" id="4_73hqn"]
 [ext_resource type="PackedScene" uid="uid://dsgb1cboxfm4" path="res://truck/interior/upgrades/generator.tscn" id="4_uf6vq"]
 [ext_resource type="PackedScene" uid="uid://bs4xxmb4byj2g" path="res://truck/interior/ui/truck_interior_hud.tscn" id="6_mmuij"]

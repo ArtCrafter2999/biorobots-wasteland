@@ -9,7 +9,7 @@ func _ready() -> void:
 	generate();
 
 func generate():
-	var value_left = value;
+	var value_left = max(value - GameState.day_count * 3, 1);
 	var taken_points: Array[Vector2] = [];
 	
 	while value_left > 0:
