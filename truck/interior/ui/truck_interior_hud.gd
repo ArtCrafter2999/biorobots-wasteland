@@ -1,3 +1,4 @@
+class_name TruckInteriorHud
 extends Control
 
 signal Upgrade_Selected(index: int)
@@ -10,6 +11,8 @@ signal Recycle_Crew_Member(member: CharacterData)
 @export var upgrades: ItemList
 @export var confirm_panel: Control
 @export var crew_list: ItemList
+
+@onready var not_enough_energy_panel: PanelContainer = $MarginContainer/HBoxContainer/NotEnoughEnergyPanel
 
 
 func _ready() -> void:
@@ -77,3 +80,7 @@ func _on_recycle_crew_pressed() -> void:
 	PlayerInventory.add_item("energy", 5)
 	Recycle_Crew_Member.emit(member)
 	_update_crew_list()
+	not_enough_energy_panel.hide();
+
+func show_not_enough():
+	not_enough_energy_panel.show();
