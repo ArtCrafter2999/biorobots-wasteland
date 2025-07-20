@@ -5,6 +5,7 @@ signal Upgrade_Selected(index: int)
 signal Upgrade_Deselected
 signal Next_Region
 signal Recycle_Crew_Member(member: CharacterData)
+signal Button_Clicked
 
 @export var resource_counter: RichTextLabel
 @export var travel_cost: RichTextLabel
@@ -57,11 +58,13 @@ func _on_upgrade_selected(index: int) -> void:
 
 
 func _on_next_region_pressed() -> void:
+	Button_Clicked.emit()
 	confirm_panel.show()
 
 
 func _player_ready() -> void:
 	confirm_panel.hide()
+	Button_Clicked.emit()
 	Next_Region.emit()
 	print_debug("Next region confirmed.")
 
@@ -80,7 +83,8 @@ func _on_recycle_crew_pressed() -> void:
 	PlayerInventory.add_item("energy", 5)
 	Recycle_Crew_Member.emit(member)
 	_update_crew_list()
-	not_enough_energy_panel.hide();
+	not_enough_energy_panel.hide()
+	Button_Clicked.emit()
 
 func show_not_enough():
 	not_enough_energy_panel.show();

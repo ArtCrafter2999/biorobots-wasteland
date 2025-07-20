@@ -1,5 +1,7 @@
 extends Control
 
+signal Button_Clicked
+
 @export var region_timer: Timer
 @export var scene_swither: SceneSwitcher
 @export var biomass_counter: RichTextLabel
@@ -23,4 +25,5 @@ func _update_counters() -> void:
 
 
 func _on_finish_day_button_pressed() -> void:
+	Button_Clicked.emit()
 	scene_swither._switch_to_inside();
